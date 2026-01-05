@@ -1,10 +1,24 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { SetDiscountDto } from './dto/set-discount.dto';
 import { ProductsQueryDto } from './dto/products-query.dto';
-import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiParam } from '@nestjs/swagger';
 import { Product } from './entities/product.entity';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-guard';
+import { RolesGuard } from 'src/auth/guards/roles-guard';
+import { Roles } from 'src/auth/common/decorators/role.decorator';
 
 @ApiTags('Products')
 @Controller('products')
@@ -151,5 +165,90 @@ export class ProductsController {
   @ApiResponse({ status: 200, description: 'Product deleted' })
   async remove(@Param('id') id: string): Promise<void> {
     return this.productsService.remove(id);
+  }
+
+  @Patch(':id/discount')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('admin')
+  @ApiBearerAuth()
+  @ApiOperation({
+    summary: 'Set discount on product (Admin only)',
+    description:
+      'Sets a discount on a product. The discount can be specified as a percentage, and the old price will be calculated automatically, or you can provide the old price directly.',
+  })
+  @ApiParam({
+    name: 'id',
+    type: 'string',
+    description: 'Product ID (UUID)',
+    example: '123e4567-e89b-12d3-a456-426614174000',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Discount applied successfully',
+    type: Product,
+    schema: {
+      example: {
+        id: '123e4567-e89b-12d3-a456-426614174000',
+        name: 'Футбольный мяч Adidas',
+        price: 8990,
+        oldPrice: 10990,
+        // ... other fields
+      },
+    },
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Bad request - Invalid discount percentage or old price',
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'Unauthorized',
+  })
+  @ApiResponse({
+    status: 403,
+    description: 'Forbidden - Admin role required',
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Product not found',
+  })
+  async setDiscount(@Param('id') id: string, @Body() setDiscountDto: SetDiscountDto) {
+    return this.productsService.setDiscount(id, setDiscountDto);
+  }
+
+  @Patch(':id/discount/remove')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('admin')
+  @ApiBearerAuth()
+  @ApiOperation({
+    summary: 'Remove discount from product (Admin only)',
+    description:
+      'Removes the discount from a product by restoring the price to the old price (if it exists) and clearing the oldPrice field.',
+  })
+  @ApiParam({
+    name: 'id',
+    type: 'string',
+    description: 'Product ID (UUID)',
+    example: '123e4567-e89b-12d3-a456-426614174000',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Discount removed successfully',
+    type: Product,
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'Unauthorized',
+  })
+  @ApiResponse({
+    status: 403,
+    description: 'Forbidden - Admin role required',
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Product not found',
+  })
+  async removeDiscount(@Param('id') id: string) {
+    return this.productsService.removeDiscount(id);
   }
 }

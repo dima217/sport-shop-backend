@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { Product } from './entities/product.entity';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { SetDiscountDto } from './dto/set-discount.dto';
 import { ProductsQueryDto, SortBy } from './dto/products-query.dto';
 
 @Injectable()
@@ -167,5 +168,35 @@ export class ProductsService {
   async remove(id: string): Promise<void> {
     const product = await this.findOne(id);
     await this.productRepository.remove(product);
+  }
+
+  async setDiscount(id: string, setDiscountDto: SetDiscountDto): Promise<Product> {
+    const product = await this.findOne(id);
+
+    if (setDiscountDto.oldPrice) {
+      // If oldPrice is provided, use it directly and calculate new discounted price
+      product.oldPrice = setDiscountDto.oldPrice;
+      const discountMultiplier = 1 - setDiscountDto.discountPercent / 100;
+      product.price = Math.round(setDiscountDto.oldPrice * discountMultiplier);
+    } else {
+      // Current price becomes the old price, calculate new discounted price
+      product.oldPrice = product.price;
+      const discountMultiplier = 1 - setDiscountDto.discountPercent / 100;
+      product.price = Math.round(product.price * discountMultiplier);
+    }
+
+    return this.productRepository.save(product);
+  }
+
+  async removeDiscount(id: string): Promise<Product> {
+    const product = await this.findOne(id);
+
+    // Restore price to oldPrice if it exists, otherwise keep current price
+    if (product.oldPrice) {
+      product.price = product.oldPrice;
+      product.oldPrice = null;
+    }
+
+    return this.productRepository.save(product);
   }
 }

@@ -4,6 +4,7 @@ import { Repository, DataSource } from 'typeorm';
 import { Order, OrderStatus } from './entities/order.entity';
 import { OrderItem } from './entities/order-item.entity';
 import { CreateOrderDto } from './dto/create-order.dto';
+import { UpdateOrderStatusDto } from './dto/update-order-status.dto';
 import { CartService } from '../cart/cart.service';
 
 @Injectable()
@@ -84,5 +85,56 @@ export class OrdersService {
     }
 
     return order;
+  }
+
+  async findAllAdmin(
+    status?: OrderStatus,
+    limit = 20,
+    offset = 0,
+    sortBy: 'createdAt' | 'total' = 'createdAt',
+    sortOrder: 'asc' | 'desc' = 'desc',
+  ): Promise<{ orders: Order[]; total: number; limit: number; offset: number }> {
+    const queryBuilder = this.orderRepository
+      .createQueryBuilder('order')
+      .leftJoinAndSelect('order.items', 'items')
+      .leftJoinAndSelect('items.product', 'product')
+      .leftJoinAndSelect('product.category', 'category')
+      .leftJoinAndSelect('order.user', 'user')
+      .leftJoinAndSelect('user.profile', 'profile');
+
+    if (status) {
+      queryBuilder.where('order.status = :status', { status });
+    }
+
+    // Get total count before pagination
+    const total = await queryBuilder.getCount();
+
+    // Apply sorting
+    if (sortBy === 'total') {
+      queryBuilder.orderBy('order.total', sortOrder.toUpperCase() as 'ASC' | 'DESC');
+    } else {
+      queryBuilder.orderBy('order.createdAt', sortOrder.toUpperCase() as 'ASC' | 'DESC');
+    }
+
+    // Apply pagination
+    queryBuilder.skip(offset).take(limit);
+
+    const orders = await queryBuilder.getMany();
+
+    return {
+      orders,
+      total,
+      limit,
+      offset,
+    };
+  }
+
+  async updateStatus(id: string, updateStatusDto: UpdateOrderStatusDto): Promise<Order> {
+    const order = await this.findOne(id);
+
+    order.status = updateStatusDto.status;
+    await this.orderRepository.save(order);
+
+    return this.findOne(id);
   }
 }
