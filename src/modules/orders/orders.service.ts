@@ -26,7 +26,7 @@ export class OrdersService {
     }
 
     // Create order in transaction
-    return this.dataSource.transaction(async (manager) => {
+    const savedOrder = await this.dataSource.transaction(async (manager) => {
       const order = manager.create(Order, {
         userId,
         status: OrderStatus.PENDING,
@@ -35,7 +35,7 @@ export class OrdersService {
         deliveryPostalCode: createOrderDto.deliveryAddress.postalCode,
         deliveryCountry: createOrderDto.deliveryAddress.country,
         paymentMethod: createOrderDto.paymentMethod,
-        comment: createOrderDto.comment || null,
+        comment: createOrderDto.comment ?? null,
         total: cart.total,
       });
 
@@ -58,9 +58,11 @@ export class OrdersService {
       // Clear cart
       await this.cartService.clearCart(userId);
 
-      // Return order with items
-      return this.findOne(savedOrder.id);
+      return savedOrder;
     });
+
+    // Return order with items (load after transaction)
+    return this.findOne(savedOrder.id);
   }
 
   async findAll(userId: number): Promise<Order[]> {
