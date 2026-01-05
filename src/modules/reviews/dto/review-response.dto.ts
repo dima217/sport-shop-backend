@@ -9,13 +9,6 @@ export class ReviewUserDto {
 
   @ApiProperty({ description: 'User last name', example: 'Иванов' })
   lastName: string;
-
-  @ApiProperty({
-    description: 'User avatar URL',
-    example: 'https://example.com/avatar.jpg',
-    nullable: true,
-  })
-  avatarUrl: string | null;
 }
 
 export class ReviewResponseDto {

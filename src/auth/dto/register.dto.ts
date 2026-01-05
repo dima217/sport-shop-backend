@@ -15,8 +15,4 @@ export class RegisterUserDto {
   @IsString()
   @IsNotEmpty()
   lastName: string;
-
-  /* @IsString()
-  @IsOptional()
-  avatarUrl?: string; */
 }

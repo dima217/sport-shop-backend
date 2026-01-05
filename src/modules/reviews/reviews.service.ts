@@ -139,7 +139,6 @@ export class ReviewsService {
         id: review.user.id,
         firstName: review.user.profile?.firstName || '',
         lastName: review.user.profile?.lastName || '',
-        avatarUrl: review.user.profile?.avatarUrl || null,
       },
       rating: review.rating,
       comment: review.comment,

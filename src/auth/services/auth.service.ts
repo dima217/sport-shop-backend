@@ -112,7 +112,6 @@ export class AuthService {
         {
           firstName: params.firstName,
           lastName: params.lastName,
-          avatarUrl: null,
         },
         manager,
       );

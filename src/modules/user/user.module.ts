@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { UsersService } from './services/user.service';
 import { UserController } from './controllers/user.controller';
+import { ProfileController } from './controllers/profile.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { JwtModule } from '@nestjs/jwt';
@@ -20,7 +21,7 @@ import { ProfileService } from './services/profile.service';
       inject: [ConfigService],
     }),
   ],
-  controllers: [UserController],
+  controllers: [UserController, ProfileController],
   providers: [UsersService, ProfileService],
   exports: [UsersService, ProfileService],
 })

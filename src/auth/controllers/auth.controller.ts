@@ -42,7 +42,6 @@ export class AuthController {
                 id: { type: 'string' },
                 firstName: { type: 'string' },
                 lastName: { type: 'string' },
-                avatarUrl: { type: 'string', nullable: true },
               },
             },
           },
@@ -65,7 +64,6 @@ export class AuthController {
           id: String(profile.id),
           firstName: profile.firstName,
           lastName: profile.lastName,
-          avatarUrl: profile.avatarUrl,
         },
       },
     });

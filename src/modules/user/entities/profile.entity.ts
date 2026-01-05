@@ -15,9 +15,6 @@ export class Profile {
   @Column()
   lastName: string;
 
-  @Column({ type: 'varchar', nullable: true })
-  avatarUrl: string | null;
-
   @OneToOne(() => User, (user) => user.profile)
   @JoinColumn()
   user: User;

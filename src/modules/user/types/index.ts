@@ -18,6 +18,5 @@ export interface LoginUserPayload {
     id: number;
     firstName: string;
     lastName: string;
-    avatarUrl: string | null;
   };
 }
