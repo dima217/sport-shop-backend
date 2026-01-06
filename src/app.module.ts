@@ -14,6 +14,7 @@ import { FavoritesModule } from './modules/favorites/favorites.module';
 import { OrdersModule } from './modules/orders/orders.module';
 import { ReviewsModule } from './modules/reviews/reviews.module';
 import { AdminStatisticsModule } from './modules/admin-statistics/admin-statistics.module';
+import { WebSocketModule } from './modules/websocket/websocket.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { AdminStatisticsModule } from './modules/admin-statistics/admin-statisti
     OrdersModule,
     ReviewsModule,
     AdminStatisticsModule,
+    WebSocketModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -237,7 +237,7 @@ export class ReviewsService {
     userId: number,
     updateReviewDto: UpdateReviewDto,
   ): Promise<ReviewResponseDto> {
-    const review = await this.findOne(productId, reviewId);
+    const review = await this.findOneEntity(productId, reviewId);
 
     // Check if user is the author
     if (review.userId !== userId) {

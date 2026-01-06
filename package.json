@@ -20,7 +20,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "prepare": "husky",
     "swagger:generate": "ts-node -r tsconfig-paths/register scripts/generate-swagger.ts",
-    "seed": "ts-node -r tsconfig-paths/register scripts/seed-database.ts"
+    "seed": "ts-node -r tsconfig-paths/register scripts/seed-database.ts",
+    "create-admin": "ts-node -r tsconfig-paths/register scripts/create-admin.ts"
   },
   "dependencies": {
     "@nestjs/axios": "^4.0.1",

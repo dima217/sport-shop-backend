@@ -6,12 +6,14 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { SetDiscountDto } from './dto/set-discount.dto';
 import { ProductsQueryDto, SortBy } from './dto/products-query.dto';
+import { AppWebSocketGateway } from '../websocket/websocket.gateway';
 
 @Injectable()
 export class ProductsService {
   constructor(
     @InjectRepository(Product)
     private productRepository: Repository<Product>,
+    private webSocketGateway: AppWebSocketGateway,
   ) {}
 
   async findAll(
@@ -156,22 +158,67 @@ export class ProductsService {
 
   async create(createProductDto: CreateProductDto): Promise<Product> {
     const product = this.productRepository.create(createProductDto);
-    return this.productRepository.save(product);
+    const savedProduct = await this.productRepository.save(product);
+
+    // Load with relations for WebSocket event
+    const productWithRelations = await this.findOne(savedProduct.id);
+    this.webSocketGateway.emitProductCreated(productWithRelations);
+
+    return savedProduct;
   }
 
   async update(id: string, updateProductDto: UpdateProductDto): Promise<Product> {
     const product = await this.findOne(id);
+    const oldPrice = product.price;
+    const oldStock = product.stockQuantity ?? 0;
+    const oldInStock = product.inStock;
+
     Object.assign(product, updateProductDto);
-    return this.productRepository.save(product);
+    const savedProduct = await this.productRepository.save(product);
+
+    // Load with relations for WebSocket events
+    const productWithRelations = await this.findOne(savedProduct.id);
+
+    // Emit price change event if price changed
+    if (updateProductDto.price !== undefined && updateProductDto.price !== oldPrice) {
+      this.webSocketGateway.emitProductPriceChanged(
+        id,
+        oldPrice,
+        savedProduct.price,
+        productWithRelations,
+      );
+    }
+
+    // Emit stock change event if stock changed
+    if (
+      (updateProductDto.stockQuantity !== undefined &&
+        updateProductDto.stockQuantity !== oldStock) ||
+      (updateProductDto.inStock !== undefined && updateProductDto.inStock !== oldInStock)
+    ) {
+      this.webSocketGateway.emitProductStockChanged(
+        id,
+        oldStock,
+        savedProduct.stockQuantity ?? 0,
+        savedProduct.inStock,
+        productWithRelations,
+      );
+    }
+
+    // Emit general update event
+    this.webSocketGateway.emitProductUpdated(productWithRelations);
+
+    return savedProduct;
   }
 
   async remove(id: string): Promise<void> {
     const product = await this.findOne(id);
     await this.productRepository.remove(product);
+    this.webSocketGateway.emitProductDeleted(id);
   }
 
   async setDiscount(id: string, setDiscountDto: SetDiscountDto): Promise<Product> {
     const product = await this.findOne(id);
+    const originalPrice = product.oldPrice || product.price;
 
     if (setDiscountDto.oldPrice) {
       // If oldPrice is provided, use it directly and calculate new discounted price
@@ -185,11 +232,25 @@ export class ProductsService {
       product.price = Math.round(product.price * discountMultiplier);
     }
 
-    return this.productRepository.save(product);
+    const savedProduct = await this.productRepository.save(product);
+
+    // Load with relations for WebSocket event
+    const productWithRelations = await this.findOne(savedProduct.id);
+
+    this.webSocketGateway.emitProductDiscountApplied(
+      id,
+      setDiscountDto.discountPercent,
+      originalPrice,
+      savedProduct.price,
+      productWithRelations,
+    );
+
+    return savedProduct;
   }
 
   async removeDiscount(id: string): Promise<Product> {
     const product = await this.findOne(id);
+    const oldPrice = product.price;
 
     // Restore price to oldPrice if it exists, otherwise keep current price
     if (product.oldPrice) {
@@ -197,6 +258,18 @@ export class ProductsService {
       product.oldPrice = null;
     }
 
-    return this.productRepository.save(product);
+    const savedProduct = await this.productRepository.save(product);
+
+    // Load with relations for WebSocket event
+    const productWithRelations = await this.findOne(savedProduct.id);
+
+    this.webSocketGateway.emitProductDiscountRemoved(
+      id,
+      oldPrice,
+      savedProduct.price,
+      productWithRelations,
+    );
+
+    return savedProduct;
   }
 }
