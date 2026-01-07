@@ -6,6 +6,7 @@ import { OrderItem } from './entities/order-item.entity';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderStatusDto } from './dto/update-order-status.dto';
 import { CartService } from '../cart/cart.service';
+import { AppWebSocketGateway } from '../websocket/websocket.gateway';
 
 @Injectable()
 export class OrdersService {
@@ -16,6 +17,7 @@ export class OrdersService {
     private orderItemRepository: Repository<OrderItem>,
     private cartService: CartService,
     private dataSource: DataSource,
+    private webSocketGateway: AppWebSocketGateway,
   ) {}
 
   async create(userId: number, createOrderDto: CreateOrderDto): Promise<Order> {
@@ -131,10 +133,21 @@ export class OrdersService {
 
   async updateStatus(id: string, updateStatusDto: UpdateOrderStatusDto): Promise<Order> {
     const order = await this.findOne(id);
+    const oldStatus = order.status;
 
     order.status = updateStatusDto.status;
     await this.orderRepository.save(order);
 
-    return this.findOne(id);
+    const updatedOrder = await this.findOne(id);
+
+    // Emit WebSocket event for order status update
+    this.webSocketGateway.emitOrderStatusUpdated(
+      id,
+      oldStatus,
+      updateStatusDto.status,
+      updatedOrder,
+    );
+
+    return updatedOrder;
   }
 }

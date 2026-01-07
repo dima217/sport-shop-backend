@@ -23,12 +23,39 @@ export class UsersService {
     private userRepository: Repository<User>,
   ) {}
 
-  async findAllPaginated(page: number, limit: number): Promise<[User[], number]> {
-    return this.userRepository.findAndCount({
-      skip: (page - 1) * limit,
-      take: limit,
-      order: { id: 'ASC' },
-    });
+  async findAll(
+    limit = 20,
+    offset = 0,
+    sortBy: 'id' | 'email' = 'id',
+    sortOrder: 'asc' | 'desc' = 'asc',
+  ): Promise<{ users: User[]; total: number; limit: number; offset: number }> {
+    // Build query with relations
+    const queryBuilder = this.userRepository
+      .createQueryBuilder('user')
+      .leftJoinAndSelect('user.profile', 'profile');
+
+    // Get total count before pagination (without relations for performance)
+    const total = await this.userRepository.count();
+
+    // Apply sorting
+    const orderDirection = sortOrder.toUpperCase() as 'ASC' | 'DESC';
+    if (sortBy === 'email') {
+      queryBuilder.orderBy('user.email', orderDirection);
+    } else {
+      queryBuilder.orderBy('user.id', orderDirection);
+    }
+
+    // Apply pagination
+    queryBuilder.skip(offset).take(limit);
+
+    const users = await queryBuilder.getMany();
+
+    return {
+      users,
+      total,
+      limit,
+      offset,
+    };
   }
 
   async getUserById(id: number): Promise<User | null> {

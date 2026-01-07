@@ -343,6 +343,91 @@ socket.on('category:deleted', (payload) => {
 
 ---
 
+### События заказов (Orders)
+
+#### `order:status_updated`
+
+Событие отправляется при изменении статуса заказа администратором.
+
+**Payload:**
+
+```typescript
+{
+  orderId: string; // UUID заказа
+  oldStatus: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled'; // Старый статус
+  newStatus: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled'; // Новый статус
+  order: {
+    // Полный объект заказа
+    id: string;
+    userId: number;
+    status: string;
+    total: number;
+    deliveryStreet: string;
+    deliveryCity: string;
+    deliveryPostalCode: string;
+    deliveryCountry: string;
+    paymentMethod: 'card' | 'cash';
+    comment: string | null;
+    createdAt: string;
+    items?: Array<{
+      // Элементы заказа (если включены в relations)
+      id: string;
+      productId: string;
+      quantity: number;
+      size: string | null;
+      color: string | null;
+      price: number;
+      product?: {
+        // Информация о товаре (если включена в relations)
+        id: string;
+        name: string;
+        // ... другие поля товара
+      };
+    }>;
+    user?: {
+      // Информация о пользователе (если включена в relations)
+      id: number;
+      email: string;
+      profile?: {
+        firstName: string;
+        lastName: string;
+      };
+    };
+  };
+  timestamp: string; // ISO 8601 timestamp
+}
+```
+
+**Пример обработки:**
+
+```javascript
+socket.on('order:status_updated', (payload) => {
+  console.log(
+    `Статус заказа ${payload.orderId} изменен: ${payload.oldStatus} -> ${payload.newStatus}`,
+  );
+  
+  // Обновить статус заказа на фронтенде
+  updateOrderStatus(payload.orderId, payload.newStatus);
+  
+  // Показать уведомление пользователю (если это его заказ)
+  if (isUserOrder(payload.order.userId)) {
+    const statusMessages = {
+      pending: 'Заказ ожидает обработки',
+      processing: 'Заказ обрабатывается',
+      shipped: 'Заказ отправлен',
+      delivered: 'Заказ доставлен',
+      cancelled: 'Заказ отменен',
+    };
+    
+    showNotification(
+      `Статус вашего заказа изменен: ${statusMessages[payload.newStatus]}`,
+    );
+  }
+});
+```
+
+---
+
 ## Полный пример интеграции
 
 ```javascript
@@ -383,6 +468,9 @@ class WebSocketService {
     this.socket.on('category:created', this.handleCategoryCreated.bind(this));
     this.socket.on('category:updated', this.handleCategoryUpdated.bind(this));
     this.socket.on('category:deleted', this.handleCategoryDeleted.bind(this));
+
+    // События заказов
+    this.socket.on('order:status_updated', this.handleOrderStatusUpdated.bind(this));
   }
 
   handleProductCreated(payload) {
@@ -446,6 +534,24 @@ class WebSocketService {
     this.removeCategoryFromList(payload.categoryId);
   }
 
+  handleOrderStatusUpdated(payload) {
+    // Обновить статус заказа
+    this.updateOrderStatus(payload.orderId, payload.newStatus);
+    
+    // Показать уведомление пользователю
+    const statusMessages = {
+      pending: 'Заказ ожидает обработки',
+      processing: 'Заказ обрабатывается',
+      shipped: 'Заказ отправлен',
+      delivered: 'Заказ доставлен',
+      cancelled: 'Заказ отменен',
+    };
+    
+    this.showNotification(
+      `Статус заказа #${payload.orderId.slice(0, 8)} изменен: ${statusMessages[payload.newStatus]}`,
+    );
+  }
+
   disconnect() {
     this.socket.disconnect();
   }
@@ -480,5 +586,24 @@ enum WebSocketEvent {
   CATEGORY_CREATED = 'category:created',
   CATEGORY_UPDATED = 'category:updated',
   CATEGORY_DELETED = 'category:deleted',
+  ORDER_STATUS_UPDATED = 'order:status_updated',
+}
+
+// Типы статусов заказа
+enum OrderStatus {
+  PENDING = 'pending',
+  PROCESSING = 'processing',
+  SHIPPED = 'shipped',
+  DELIVERED = 'delivered',
+  CANCELLED = 'cancelled',
+}
+
+// Типы payload для событий заказов
+interface OrderStatusUpdatePayload {
+  orderId: string;
+  oldStatus: OrderStatus;
+  newStatus: OrderStatus;
+  order: Order; // Полный объект заказа
+  timestamp: string;
 }
 ```

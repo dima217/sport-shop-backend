@@ -9,6 +9,7 @@ import { Server, Socket } from 'socket.io';
 import { Logger } from '@nestjs/common';
 import { Product } from '../products/entities/product.entity';
 import { Category } from '../categories/entities/category.entity';
+import { Order, OrderStatus } from '../orders/entities/order.entity';
 
 export enum WebSocketEvent {
   // Product events
@@ -24,6 +25,9 @@ export enum WebSocketEvent {
   CATEGORY_CREATED = 'category:created',
   CATEGORY_UPDATED = 'category:updated',
   CATEGORY_DELETED = 'category:deleted',
+
+  // Order events
+  ORDER_STATUS_UPDATED = 'order:status_updated',
 }
 
 export interface ProductEventPayload {
@@ -59,6 +63,14 @@ export interface StockChangePayload {
   newStock: number;
   inStock: boolean;
   product: Product;
+  timestamp: string;
+}
+
+export interface OrderStatusUpdatePayload {
+  orderId: string;
+  oldStatus: OrderStatus;
+  newStatus: OrderStatus;
+  order: Order;
   timestamp: string;
 }
 
@@ -246,5 +258,27 @@ export class AppWebSocketGateway
       timestamp: new Date().toISOString(),
     });
     this.logger.log(`Category deleted event emitted: ${categoryId}`);
+  }
+
+  /**
+   * Emit order status updated event to all connected clients
+   */
+  emitOrderStatusUpdated(
+    orderId: string,
+    oldStatus: OrderStatus,
+    newStatus: OrderStatus,
+    order: Order,
+  ): void {
+    const payload: OrderStatusUpdatePayload = {
+      orderId,
+      oldStatus,
+      newStatus,
+      order,
+      timestamp: new Date().toISOString(),
+    };
+    this.server.emit(WebSocketEvent.ORDER_STATUS_UPDATED, payload);
+    this.logger.log(
+      `Order status updated event emitted: ${orderId} (${oldStatus} -> ${newStatus})`,
+    );
   }
 }
