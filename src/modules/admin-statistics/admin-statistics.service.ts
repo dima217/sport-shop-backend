@@ -145,62 +145,85 @@ export class AdminStatisticsService {
         startDate = new Date(now);
         startDate.setFullYear(startDate.getFullYear() - 1);
         break;
+      default:
+        startDate = new Date(now);
+        startDate.setMonth(startDate.getMonth() - 1);
+        break;
     }
 
-    // Top products by sales (from order items)
-    const topProducts = await this.orderRepository
-      .createQueryBuilder('order')
-      .innerJoin('order.items', 'item')
-      .innerJoin('item.product', 'product')
-      .select('product.id', 'productId')
-      .addSelect('product.name', 'productName')
-      .addSelect('SUM(item.quantity)', 'salesCount')
-      .addSelect('SUM(item.price * item.quantity)', 'revenue')
-      .where('order.createdAt >= :startDate', { startDate })
-      .andWhere('order.status != :cancelled', { cancelled: OrderStatus.CANCELLED })
-      .groupBy('product.id')
-      .addGroupBy('product.name')
-      .orderBy('salesCount', 'DESC')
-      .limit(10)
-      .getRawMany();
+    try {
+      // Top products by sales (from order items)
+      const topProducts = (await this.orderRepository
+        .createQueryBuilder('order')
+        .innerJoin('order.items', 'item')
+        .innerJoin('item.product', 'product')
+        .select('product.id', 'productId')
+        .addSelect('product.name', 'productName')
+        .addSelect('COALESCE(SUM(item.quantity), 0)', 'salesCount')
+        .addSelect('COALESCE(SUM(item.price * item.quantity), 0)', 'revenue')
+        .where('order.createdAt >= :startDate', { startDate })
+        .andWhere('order.status != :cancelled', { cancelled: OrderStatus.CANCELLED })
+        .groupBy('product.id')
+        .addGroupBy('product.name')
+        .orderBy('COALESCE(SUM(item.quantity), 0)', 'DESC')
+        .limit(10)
+        .getRawMany()) as unknown as Array<{
+        productId: string;
+        productName: string;
+        salesCount: string;
+        revenue: string;
+      }>;
 
-    // Low stock products (stockQuantity <= 10)
-    const lowStock = await this.productRepository
-      .createQueryBuilder('product')
-      .where('product.inStock = :inStock', { inStock: true })
-      .andWhere('product.stockQuantity <= :threshold', { threshold: 10 })
-      .orderBy('product.stockQuantity', 'ASC')
-      .limit(20)
-      .getMany();
+      // Low stock products (stockQuantity <= 10)
+      const lowStock = await this.productRepository
+        .createQueryBuilder('product')
+        .where('product.inStock = :inStock', { inStock: true })
+        .andWhere('product.stockQuantity IS NOT NULL')
+        .andWhere('product.stockQuantity <= :threshold', { threshold: 10 })
+        .orderBy('product.stockQuantity', 'ASC')
+        .limit(20)
+        .getMany();
 
-    // Out of stock products
-    const outOfStock = await this.productRepository
-      .createQueryBuilder('product')
-      .where('product.inStock = :inStock', { inStock: false })
-      .orWhere('product.stockQuantity = :zero', { zero: 0 })
-      .orderBy('product.updatedAt', 'DESC')
-      .limit(20)
-      .getMany();
+      // Out of stock products
+      const outOfStock = await this.productRepository
+        .createQueryBuilder('product')
+        .where('product.inStock = :inStock', { inStock: false })
+        .orWhere('(product.stockQuantity IS NOT NULL AND product.stockQuantity = :zero)', {
+          zero: 0,
+        })
+        .orderBy('product.updatedAt', 'DESC')
+        .limit(20)
+        .getMany();
 
-    return {
-      topProducts: topProducts.map((item) => ({
-        productId: item.productId,
-        productName: item.productName,
-        salesCount: parseInt(item.salesCount || '0', 10),
-        revenue: parseInt(item.revenue || '0', 10),
-      })),
-      lowStock: lowStock.map((product) => ({
-        productId: product.id,
-        productName: product.name,
-        stockQuantity: product.stockQuantity,
-        inStock: product.inStock,
-      })),
-      outOfStock: outOfStock.map((product) => ({
-        productId: product.id,
-        productName: product.name,
-        stockQuantity: product.stockQuantity || 0,
-        inStock: product.inStock,
-      })),
-    };
+      return {
+        topProducts: topProducts.map((item) => ({
+          productId: item.productId || '',
+          productName: item.productName || '',
+          salesCount: parseInt(item.salesCount || '0', 10),
+          revenue: parseInt(item.revenue || '0', 10),
+        })),
+        lowStock: lowStock.map((product) => ({
+          productId: product.id,
+          productName: product.name,
+          stockQuantity: product.stockQuantity ?? 0,
+          inStock: product.inStock,
+        })),
+        outOfStock: outOfStock.map((product) => ({
+          productId: product.id,
+          productName: product.name,
+          stockQuantity: product.stockQuantity ?? 0,
+          inStock: product.inStock,
+        })),
+      };
+    } catch (error) {
+      // Log error for debugging
+      console.error('Error in getProductsStatistics:', error);
+      // Return empty result instead of throwing
+      return {
+        topProducts: [],
+        lowStock: [],
+        outOfStock: [],
+      };
+    }
   }
 }
