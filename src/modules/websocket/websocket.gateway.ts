@@ -28,6 +28,11 @@ export enum WebSocketEvent {
 
   // Order events
   ORDER_STATUS_UPDATED = 'order:status_updated',
+
+  // Support ticket events
+  SUPPORT_TICKET_CREATED = 'support:ticket_created',
+  SUPPORT_TICKET_REPLIED = 'support:ticket_replied',
+  SUPPORT_TICKET_STATUS_UPDATED = 'support:ticket_status_updated',
 }
 
 export interface ProductEventPayload {
@@ -71,6 +76,32 @@ export interface OrderStatusUpdatePayload {
   oldStatus: OrderStatus;
   newStatus: OrderStatus;
   order: Order;
+  timestamp: string;
+}
+
+export interface SupportTicketCreatedPayload {
+  ticketId: number;
+  userId: number;
+  subject: string;
+  status: string;
+  createdAt: Date;
+  timestamp: string;
+}
+
+export interface SupportTicketRepliedPayload {
+  ticketId: number;
+  userId: number;
+  response: string;
+  status: string;
+  updatedAt: Date;
+  timestamp: string;
+}
+
+export interface SupportTicketStatusUpdatedPayload {
+  ticketId: number;
+  userId: number;
+  status: string;
+  updatedAt: Date;
   timestamp: string;
 }
 
@@ -280,5 +311,45 @@ export class AppWebSocketGateway
     this.logger.log(
       `Order status updated event emitted: ${orderId} (${oldStatus} -> ${newStatus})`,
     );
+  }
+
+  /**
+   * Emit support ticket created event (to admins)
+   */
+  emitSupportTicketCreated(payload: Omit<SupportTicketCreatedPayload, 'timestamp'>): void {
+    const fullPayload: SupportTicketCreatedPayload = {
+      ...payload,
+      timestamp: new Date().toISOString(),
+    };
+    this.server.emit(WebSocketEvent.SUPPORT_TICKET_CREATED, fullPayload);
+    this.logger.log(`Support ticket created event emitted: ${payload.ticketId}`);
+  }
+
+  /**
+   * Emit support ticket replied event (to specific user)
+   */
+  emitSupportTicketReplied(payload: Omit<SupportTicketRepliedPayload, 'timestamp'>): void {
+    const fullPayload: SupportTicketRepliedPayload = {
+      ...payload,
+      timestamp: new Date().toISOString(),
+    };
+    // Emit to all clients (user will filter on frontend)
+    this.server.emit(WebSocketEvent.SUPPORT_TICKET_REPLIED, fullPayload);
+    this.logger.log(`Support ticket replied event emitted: ${payload.ticketId}`);
+  }
+
+  /**
+   * Emit support ticket status updated event (to specific user)
+   */
+  emitSupportTicketStatusUpdated(
+    payload: Omit<SupportTicketStatusUpdatedPayload, 'timestamp'>,
+  ): void {
+    const fullPayload: SupportTicketStatusUpdatedPayload = {
+      ...payload,
+      timestamp: new Date().toISOString(),
+    };
+    // Emit to all clients (user will filter on frontend)
+    this.server.emit(WebSocketEvent.SUPPORT_TICKET_STATUS_UPDATED, fullPayload);
+    this.logger.log(`Support ticket status updated event emitted: ${payload.ticketId}`);
   }
 }

@@ -13,4 +13,3 @@ import { Category } from '../categories/entities/category.entity';
   exports: [AdminStatisticsService],
 })
 export class AdminStatisticsModule {}
-

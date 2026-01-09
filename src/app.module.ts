@@ -15,6 +15,7 @@ import { OrdersModule } from './modules/orders/orders.module';
 import { ReviewsModule } from './modules/reviews/reviews.module';
 import { AdminStatisticsModule } from './modules/admin-statistics/admin-statistics.module';
 import { WebSocketModule } from './modules/websocket/websocket.module';
+import { SupportModule } from './modules/support/support.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { WebSocketModule } from './modules/websocket/websocket.module';
     ReviewsModule,
     AdminStatisticsModule,
     WebSocketModule,
+    SupportModule,
   ],
   controllers: [AppController],
   providers: [AppService],
