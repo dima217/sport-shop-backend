@@ -5,6 +5,7 @@ import { Category } from './entities/category.entity';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { AppWebSocketGateway } from '../websocket/websocket.gateway';
+import { TranslationService, DEFAULT_CONTENT_LANG } from '../translation/translation.service';
 
 @Injectable()
 export class CategoriesService {
@@ -12,9 +13,10 @@ export class CategoriesService {
     @InjectRepository(Category)
     private categoryRepository: Repository<Category>,
     private webSocketGateway: AppWebSocketGateway,
+    private translationService: TranslationService,
   ) {}
 
-  async findAll(limit?: number, offset?: number): Promise<Category[]> {
+  async findAll(limit?: number, offset?: number, lang?: string): Promise<Category[]> {
     const query = this.categoryRepository
       .createQueryBuilder('category')
       .loadRelationCountAndMap('category.productCount', 'category.products');
@@ -26,10 +28,12 @@ export class CategoriesService {
       query.skip(offset);
     }
 
-    return query.getMany();
+    const categories = await query.getMany();
+
+    return lang ? this.translateCategories(categories, lang) : categories;
   }
 
-  async findOne(id: string): Promise<Category> {
+  async findOne(id: string, lang?: string): Promise<Category> {
     const category = await this.categoryRepository.findOne({
       where: { id },
       relations: ['products'],
@@ -39,7 +43,7 @@ export class CategoriesService {
       throw new NotFoundException(`Category with ID ${id} not found`);
     }
 
-    return category;
+    return lang ? this.translateCategory(category, lang) : category;
   }
 
   async create(createCategoryDto: CreateCategoryDto): Promise<Category> {
@@ -61,5 +65,24 @@ export class CategoriesService {
     const category = await this.findOne(id);
     await this.categoryRepository.remove(category);
     this.webSocketGateway.emitCategoryDeleted(id);
+  }
+
+  // ─── Translation helpers ──────────────────────────────────────────────────
+
+  private async translateCategory(category: Category, lang: string): Promise<Category> {
+    const translatedName = await this.translationService.translateText(
+      category.name,
+      DEFAULT_CONTENT_LANG,
+      lang,
+    );
+    return Object.assign(
+      Object.create(Object.getPrototypeOf(category) as object) as Category,
+      category,
+      { name: translatedName },
+    );
+  }
+
+  private async translateCategories(categories: Category[], lang: string): Promise<Category[]> {
+    return Promise.all(categories.map((c) => this.translateCategory(c, lang)));
   }
 }

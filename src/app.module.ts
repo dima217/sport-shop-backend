@@ -16,6 +16,7 @@ import { ReviewsModule } from './modules/reviews/reviews.module';
 import { AdminStatisticsModule } from './modules/admin-statistics/admin-statistics.module';
 import { WebSocketModule } from './modules/websocket/websocket.module';
 import { SupportModule } from './modules/support/support.module';
+import { BannerModule } from './modules/banner/banner.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { SupportModule } from './modules/support/support.module';
     AdminStatisticsModule,
     WebSocketModule,
     SupportModule,
+    BannerModule,
   ],
   controllers: [AppController],
   providers: [AppService],

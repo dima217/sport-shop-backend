@@ -8,6 +8,7 @@ import {
   Min,
   IsArray,
   ArrayMinSize,
+  Length,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 
@@ -189,4 +190,16 @@ export class ProductsQueryDto {
   @IsNumber()
   @Min(0)
   offset?: number;
+
+  @ApiProperty({
+    description:
+      'BCP-47 language code to translate product name and description (e.g. "en", "de", "zh"). ' +
+      'Omit to receive the original text.',
+    required: false,
+    example: 'en',
+  })
+  @IsOptional()
+  @IsString()
+  @Length(2, 10)
+  lang?: string;
 }

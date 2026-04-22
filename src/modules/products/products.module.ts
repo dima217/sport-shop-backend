@@ -5,9 +5,10 @@ import { ProductsController } from './products.controller';
 import { Product } from './entities/product.entity';
 import { CategoriesModule } from '../categories/categories.module';
 import { WebSocketModule } from '../websocket/websocket.module';
+import { TranslationModule } from '../translation/translation.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Product]), CategoriesModule, WebSocketModule],
+  imports: [TypeOrmModule.forFeature([Product]), CategoriesModule, WebSocketModule, TranslationModule],
   controllers: [ProductsController],
   providers: [ProductsService],
   exports: [ProductsService],

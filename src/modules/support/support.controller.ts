@@ -41,7 +41,8 @@ export class SupportController {
   @UseGuards(JwtAuthGuard)
   @ApiOperation({
     summary: 'Create a new support ticket',
-    description: 'Allows authenticated users to create a new support ticket with a subject and message.',
+    description:
+      'Allows authenticated users to create a new support ticket with a subject and message.',
   })
   @ApiBody({
     type: CreateSupportTicketDto,
@@ -50,7 +51,8 @@ export class SupportController {
         summary: 'Order issue',
         value: {
           subject: 'Проблема с заказом #12345',
-          message: 'Мой заказ не был доставлен в указанное время. Пожалуйста, помогите разобраться.',
+          message:
+            'Мой заказ не был доставлен в указанное время. Пожалуйста, помогите разобраться.',
         },
       },
       example2: {
@@ -75,7 +77,10 @@ export class SupportController {
     status: 400,
     description: 'Bad Request - Validation error',
   })
-  async create(@Request() req, @Body() createDto: CreateSupportTicketDto): Promise<SupportTicketResponseDto> {
+  async create(
+    @Request() req,
+    @Body() createDto: CreateSupportTicketDto,
+  ): Promise<SupportTicketResponseDto> {
     return await this.supportService.create(req.user.id, createDto);
   }
 
@@ -83,7 +88,8 @@ export class SupportController {
   @UseGuards(JwtAuthGuard)
   @ApiOperation({
     summary: 'Get all tickets for current user',
-    description: 'Retrieves all support tickets created by the authenticated user. Supports pagination, filtering by status, and sorting.',
+    description:
+      'Retrieves all support tickets created by the authenticated user. Supports pagination, filtering by status, and sorting.',
   })
   @ApiQuery({
     name: 'limit',
@@ -245,7 +251,8 @@ export class SupportController {
   @Roles('admin')
   @ApiOperation({
     summary: 'Get a single ticket by ID (Admin only)',
-    description: 'Retrieves detailed information about a specific support ticket. Only accessible by administrators.',
+    description:
+      'Retrieves detailed information about a specific support ticket. Only accessible by administrators.',
   })
   @ApiParam({
     name: 'id',
@@ -294,7 +301,8 @@ export class SupportController {
       example1: {
         summary: 'Standard reply',
         value: {
-          response: 'Спасибо за обращение. Мы проверили ваш заказ и связались с курьером. Заказ будет доставлен сегодня до 18:00.',
+          response:
+            'Спасибо за обращение. Мы проверили ваш заказ и связались с курьером. Заказ будет доставлен сегодня до 18:00.',
         },
       },
     },
@@ -332,7 +340,8 @@ export class SupportController {
   @Roles('admin')
   @ApiOperation({
     summary: 'Update ticket status (Admin only)',
-    description: 'Allows administrators to change the status of a support ticket (open, in_progress, resolved, closed).',
+    description:
+      'Allows administrators to change the status of a support ticket (open, in_progress, resolved, closed).',
   })
   @ApiParam({
     name: 'id',
@@ -385,4 +394,3 @@ export class SupportController {
     return await this.supportService.updateStatus(parseInt(id, 10), updateDto);
   }
 }
-

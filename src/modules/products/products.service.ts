@@ -7,6 +7,7 @@ import { UpdateProductDto } from './dto/update-product.dto';
 import { SetDiscountDto } from './dto/set-discount.dto';
 import { ProductsQueryDto, SortBy } from './dto/products-query.dto';
 import { AppWebSocketGateway } from '../websocket/websocket.gateway';
+import { TranslationService, DEFAULT_CONTENT_LANG } from '../translation/translation.service';
 
 @Injectable()
 export class ProductsService {
@@ -14,6 +15,7 @@ export class ProductsService {
     @InjectRepository(Product)
     private productRepository: Repository<Product>,
     private webSocketGateway: AppWebSocketGateway,
+    private translationService: TranslationService,
   ) {}
 
   async findAll(
@@ -135,15 +137,19 @@ export class ProductsService {
 
     const [products, total] = await queryBuilder.getManyAndCount();
 
+    const translatedProducts = query.lang
+      ? await this.translateProducts(products, query.lang)
+      : products;
+
     return {
-      products,
+      products: translatedProducts,
       total,
       limit,
       offset,
     };
   }
 
-  async findOne(id: string): Promise<Product> {
+  async findOne(id: string, lang?: string): Promise<Product> {
     const product = await this.productRepository.findOne({
       where: { id },
       relations: ['category'],
@@ -153,7 +159,7 @@ export class ProductsService {
       throw new NotFoundException(`Product with ID ${id} not found`);
     }
 
-    return product;
+    return lang ? this.translateProduct(product, lang) : product;
   }
 
   async create(createProductDto: CreateProductDto): Promise<Product> {
@@ -271,5 +277,23 @@ export class ProductsService {
     );
 
     return savedProduct;
+  }
+
+  // ─── Translation helpers ──────────────────────────────────────────────────
+
+  private async translateProduct(product: Product, lang: string): Promise<Product> {
+    const [name, description] = await this.translationService.translateMany(
+      [product.name, product.description],
+      DEFAULT_CONTENT_LANG,
+      lang,
+    );
+    return Object.assign(Object.create(Object.getPrototypeOf(product) as object) as Product, product, {
+      name,
+      description,
+    });
+  }
+
+  private async translateProducts(products: Product[], lang: string): Promise<Product[]> {
+    return Promise.all(products.map((p) => this.translateProduct(p, lang)));
   }
 }

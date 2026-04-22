@@ -9,12 +9,13 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
+
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { SetDiscountDto } from './dto/set-discount.dto';
 import { ProductsQueryDto } from './dto/products-query.dto';
-import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiParam } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiQuery, ApiResponse, ApiBearerAuth, ApiParam } from '@nestjs/swagger';
 import { Product } from './entities/product.entity';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-guard';
 import { RolesGuard } from 'src/auth/guards/roles-guard';
@@ -134,10 +135,16 @@ export class ProductsController {
 
   @Get(':id')
   @ApiOperation({ summary: 'Get product by ID' })
+  @ApiQuery({
+    name: 'lang',
+    required: false,
+    description: 'BCP-47 language code to translate name and description (e.g. "en", "de")',
+    example: 'en',
+  })
   @ApiResponse({ status: 200, description: 'Product details', type: Product })
   @ApiResponse({ status: 404, description: 'Product not found' })
-  async findOne(@Param('id') id: string): Promise<Product> {
-    return this.productsService.findOne(id);
+  async findOne(@Param('id') id: string, @Query('lang') lang?: string): Promise<Product> {
+    return this.productsService.findOne(id, lang);
   }
 
   @Post()

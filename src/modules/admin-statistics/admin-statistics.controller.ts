@@ -1,12 +1,6 @@
 import { Controller, Get, Query, UseGuards } from '@nestjs/common';
 import { AdminStatisticsService } from './admin-statistics.service';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiResponse,
-  ApiBearerAuth,
-  ApiQuery,
-} from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiQuery } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-guard';
 import { RolesGuard } from 'src/auth/guards/roles-guard';
 import { Roles } from 'src/auth/common/decorators/role.decorator';
@@ -151,4 +145,3 @@ export class AdminStatisticsController {
     return this.statisticsService.getProductsStatistics(period || 'month');
   }
 }
-

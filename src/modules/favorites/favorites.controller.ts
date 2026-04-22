@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Param, Delete, Query, UseGuards, Req } from '@nestjs/common';
 import { FavoritesService } from './favorites.service';
-import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiQuery, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import type { RequestWithUser } from 'src/types/express';
 
@@ -13,6 +13,12 @@ export class FavoritesController {
 
   @Get()
   @ApiOperation({ summary: 'Get user favorites' })
+  @ApiQuery({
+    name: 'lang',
+    required: false,
+    description: 'BCP-47 language code to translate product name and description (e.g. "en", "de")',
+    example: 'en',
+  })
   @ApiResponse({
     status: 200,
     description: 'List of favorite products',
@@ -28,11 +34,13 @@ export class FavoritesController {
     @Req() req: RequestWithUser,
     @Query('limit') limit?: number,
     @Query('offset') offset?: number,
+    @Query('lang') lang?: string,
   ) {
     return this.favoritesService.findAll(
       req.user.id,
       limit ? Number(limit) : undefined,
       offset ? Number(offset) : undefined,
+      lang,
     );
   }
 

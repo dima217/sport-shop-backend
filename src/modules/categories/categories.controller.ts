@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestj
 import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
-import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiQuery, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { Category } from './entities/category.entity';
 
 @ApiTags('Categories')
@@ -12,23 +12,37 @@ export class CategoriesController {
 
   @Get()
   @ApiOperation({ summary: 'Get all categories' })
+  @ApiQuery({
+    name: 'lang',
+    required: false,
+    description: 'BCP-47 language code to translate category names (e.g. "en", "de")',
+    example: 'en',
+  })
   @ApiResponse({ status: 200, description: 'List of categories', type: [Category] })
   async findAll(
     @Query('limit') limit?: number,
     @Query('offset') offset?: number,
+    @Query('lang') lang?: string,
   ): Promise<Category[]> {
     return this.categoriesService.findAll(
       limit ? Number(limit) : undefined,
       offset ? Number(offset) : undefined,
+      lang,
     );
   }
 
   @Get(':id')
   @ApiOperation({ summary: 'Get category by ID' })
+  @ApiQuery({
+    name: 'lang',
+    required: false,
+    description: 'BCP-47 language code to translate category name (e.g. "en", "de")',
+    example: 'en',
+  })
   @ApiResponse({ status: 200, description: 'Category details', type: Category })
   @ApiResponse({ status: 404, description: 'Category not found' })
-  async findOne(@Param('id') id: string): Promise<Category> {
-    return this.categoriesService.findOne(id);
+  async findOne(@Param('id') id: string, @Query('lang') lang?: string): Promise<Category> {
+    return this.categoriesService.findOne(id, lang);
   }
 
   @Post()
