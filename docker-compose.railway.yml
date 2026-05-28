@@ -12,8 +12,7 @@ version: '3.8'
 #   redis.railway.internal
 
 x-app-environment: &app-environment
-  NODE_ENV: production
-  # Do NOT set PORT here — Railway injects it automatically
+  NODE_ENV: production  
   DB_HOST: postgres.railway.internal
   DB_PORT: 5432
   DB_USERNAME: ${DB_USERNAME:-myuser}
