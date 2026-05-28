@@ -2,21 +2,38 @@ import { plainToInstance } from 'class-transformer';
 import { validateSync } from 'class-validator';
 import { AppConfig } from './configuration.interface';
 
+/**
+ * On Railway, services reach each other via private DNS: `<service>.railway.internal`.
+ * Locally in Docker Compose, short names like `postgres` / `redis` already work.
+ */
+function resolvePrivateServiceHost(host: string): string {
+  if (
+    process.env.RAILWAY_ENVIRONMENT &&
+    host &&
+    !host.includes('.') &&
+    host !== 'localhost' &&
+    host !== '127.0.0.1'
+  ) {
+    return `${host}.railway.internal`;
+  }
+  return host;
+}
+
 export const configuration = (): AppConfig => {
   const config = plainToInstance(AppConfig, {
     environment: process.env.NODE_ENV || 'development',
     port: parseInt(process.env.PORT || process.env.APP_PORT || '3000', 10),
 
     postgres: {
-      host: process.env.DB_HOST || 'localhost',
-      port: parseInt(process.env.DB_PORT || '5555', 10),
+      host: resolvePrivateServiceHost(process.env.DB_HOST || 'localhost'),
+      port: parseInt(process.env.DB_PORT || '5432', 10),
       username: process.env.DB_USERNAME || 'myuser',
       password: process.env.DB_PASSWORD || 'mysecretpassword',
       database: process.env.DB_DATABASE || 'mydatabase',
     },
 
     redis: {
-      host: process.env.REDIS_HOST || 'localhost',
+      host: resolvePrivateServiceHost(process.env.REDIS_HOST || 'localhost'),
       port: Number(process.env.REDIS_PORT) || 6379,
       password: process.env.REDIS_PASSWORD || '',
     },

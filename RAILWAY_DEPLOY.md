@@ -201,6 +201,28 @@ This opens interactive `psql`. For bulk restore, TCP Proxy + `psql < backup.sql`
 
 ---
 
+## Troubleshooting
+
+### `ETIMEDOUT` / `Unable to connect to the database`
+
+Log shows `host=postgres` and connection timeout → app cannot reach Postgres over Railway private network.
+
+**Checklist:**
+
+1. Postgres service is named exactly **`postgres`** (Settings → rename if needed).
+2. On **app** service Variables:
+   - `DB_HOST=postgres` (auto becomes `postgres.railway.internal` after redeploy with latest code)
+   - or explicitly `DB_HOST=postgres.railway.internal`
+   - `DB_PORT=5432`
+   - `DB_PASSWORD` matches `POSTGRES_PASSWORD` on postgres service
+3. Postgres service is **running** (green, no crash loop).
+4. Postgres has a **Volume** on `/var/lib/postgresql/data` (otherwise it may restart empty).
+5. Redeploy **app** after postgres is healthy.
+
+Same for Redis: `REDIS_HOST=redis` or `redis.railway.internal`.
+
+---
+
 1. Open app logs — should show successful Postgres connection.
 2. Open public domain — `GET /` should return a response.
 3. If Swagger enabled: `https://<domain>/api-docs`
@@ -224,6 +246,7 @@ API: `http://localhost:3000`
 
 - **`depends_on` is ignored on Railway.** TypeORM already retries DB connection (`retryAttempts: 10`). If app crashes on first deploy, redeploy once Postgres is healthy.
 - **Service names matter.** Use exactly `postgres`, `redis`, `app` so private DNS works.
+- On Railway the app connects to Postgres/Redis via **`postgres.railway.internal`** and **`redis.railway.internal`**. You can set `DB_HOST=postgres` — the app auto-resolves it on Railway. Or set the full hostname explicitly in Variables.
 - **Only `app` needs a public domain.** Do not expose Postgres/Redis publicly.
 - After the first successful deploy, set `DB_SYNCHRONIZE=false` on the app service for safer production operation.
 - Change default passwords (`DB_PASSWORD`, `JWT_SECRET`) before going live.
