@@ -33,14 +33,15 @@ x-app-environment: &app-environment
 
 services:
   postgres:
-    image: postgres:16-alpine
+    image: postgres:16
     restart: unless-stopped
     environment:
       POSTGRES_USER: ${DB_USERNAME:-myuser}
       POSTGRES_PASSWORD: ${DB_PASSWORD:-mysecretpassword}
       POSTGRES_DB: ${DB_DATABASE:-mydatabase}
+      PGDATA: /var/lib/postgresql/mount/data
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/mount
       - ./init-db:/docker-entrypoint-initdb.d
     healthcheck:
       test:

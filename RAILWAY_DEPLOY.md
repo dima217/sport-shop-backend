@@ -11,7 +11,7 @@ Railway does not run `docker-compose.yml` as a single process. Each service in c
 | Service  | Type              | Public access |
 |----------|-------------------|---------------|
 | `app`    | Dockerfile build  | Yes (domain)  |
-| `postgres` | `postgres:16-alpine` | No (private) |
+| `postgres` | `postgres:16` | No (private) |
 | `redis`  | `redis:7-alpine`  | No (private)  |
 
 Services communicate over Railway private network:
@@ -40,7 +40,7 @@ Services communicate over Railway private network:
 
 ### 1) Postgres
 
-- **+ New → Docker Image** → `postgres:16-alpine`
+- **+ New → Docker Image** → `postgres:16` (not `-alpine` — alpine fails with `locale: not found` on Railway)
 - Rename service to **`postgres`** (exact name)
 - Variables:
 
@@ -48,6 +48,7 @@ Services communicate over Railway private network:
 POSTGRES_USER=myuser
 POSTGRES_PASSWORD=<strong-password>
 POSTGRES_DB=mydatabase
+PGDATA=/var/lib/postgresql/mount/data
 ```
 
 - Settings → attach a **Volume** (see section below)
@@ -97,30 +98,35 @@ In Railway, volumes are **not** always visible under service Settings. Use one o
 2. Press **`Ctrl+K`** (Windows/Linux) or **`Cmd+K`** (Mac).
 3. Type **Volume** → choose **Create Volume** / **Add Volume**.
 4. Select service **`postgres`**.
-5. Set mount path: **`/var/lib/postgresql/data`**
-6. Redeploy the `postgres` service.
+5. Set mount path: **`/var/lib/postgresql/mount`** (not `/var/lib/postgresql/data`)
+6. On **postgres** service Variables add: **`PGDATA=/var/lib/postgresql/mount/data`**
+7. Redeploy the `postgres` service.
+
+> **Why not `/var/lib/postgresql/data`?** Railway volume root contains `lost+found`. Postgres refuses to init directly on a mount point. Data must live in a subdirectory — set via `PGDATA`.
 
 ### Way 2 — Right-click on canvas
 
 1. Right-click empty area on project canvas.
 2. Choose volume creation option.
-3. Attach to service `postgres` with mount path `/var/lib/postgresql/data`.
+3. Attach to service `postgres` with mount path **`/var/lib/postgresql/mount`**
+4. Add variable `PGDATA=/var/lib/postgresql/mount/data` on postgres service.
 
 ### Way 3 — CLI
 
 ```bash
 railway login
 railway link
-railway volume add --mount-path /var/lib/postgresql/data
+railway volume add --mount-path /var/lib/postgresql/mount
 ```
 
-Then attach it to the `postgres` service when prompted.
+Then attach it to the `postgres` service when prompted and set `PGDATA=/var/lib/postgresql/mount/data`.
 
 ### Important
 
 - Do **not** manually create `RAILWAY_VOLUME_MOUNT_PATH` variable — Railway sets it automatically.
-- Only **one** volume on `/var/lib/postgresql/data` per postgres service.
+- Only **one** volume per postgres service.
 - Volume appears only at **runtime**, not during build.
+- If postgres already failed with `lost+found` error: delete the broken volume, create a new one at `/var/lib/postgresql/mount`, set `PGDATA`, redeploy.
 
 ---
 
@@ -203,25 +209,46 @@ This opens interactive `psql`. For bulk restore, TCP Proxy + `psql < backup.sql`
 
 ## Troubleshooting
 
+### `initdb: directory exists but is not empty` / `lost+found`
+
+Postgres volume is mounted at `/var/lib/postgresql/data` — wrong for Railway.
+
+**Fix:**
+
+1. Remove old volume from postgres service (or create new volume).
+2. Mount path: **`/var/lib/postgresql/mount`**
+3. Variable on postgres: **`PGDATA=/var/lib/postgresql/mount/data`**
+4. Redeploy postgres — logs should show `database system is ready to accept connections`.
+
+### `sh: locale: not found` during initdb
+
+You are using **`postgres:16-alpine`**. Alpine has no locales and initdb fails on Railway.
+
+**Fix:**
+
+1. Open service **`postgres`** → change Docker image from `postgres:16-alpine` to **`postgres:16`**
+2. Keep volume mount `/var/lib/postgresql/mount` and `PGDATA=/var/lib/postgresql/mount/data`
+3. Redeploy postgres
+
 ### `ETIMEDOUT` / `Unable to connect to the database`
 
-Log shows `host=postgres` and connection timeout → app cannot reach Postgres over Railway private network.
+Log shows connection timeout → app cannot reach Postgres (often because postgres is in crash loop — fix volume first).
 
 **Checklist:**
 
 1. Postgres service is named exactly **`postgres`** (Settings → rename if needed).
-2. On **app** service Variables:
-   - `DB_HOST=postgres` (auto becomes `postgres.railway.internal` after redeploy with latest code)
-   - or explicitly `DB_HOST=postgres.railway.internal`
+2. Postgres logs show **ready to accept connections** (not initdb errors).
+3. On **app** service Variables:
+   - `DB_HOST=postgres` (auto becomes `postgres.railway.internal` with latest code)
    - `DB_PORT=5432`
    - `DB_PASSWORD` matches `POSTGRES_PASSWORD` on postgres service
-3. Postgres service is **running** (green, no crash loop).
-4. Postgres has a **Volume** on `/var/lib/postgresql/data` (otherwise it may restart empty).
-5. Redeploy **app** after postgres is healthy.
+4. Redeploy **app** after postgres is healthy.
 
-Same for Redis: `REDIS_HOST=redis` or `redis.railway.internal`.
+Same for Redis: `REDIS_HOST=redis` (auto-resolves on Railway).
 
 ---
+
+## Verify deployment
 
 1. Open app logs — should show successful Postgres connection.
 2. Open public domain — `GET /` should return a response.
@@ -246,7 +273,7 @@ API: `http://localhost:3000`
 
 - **`depends_on` is ignored on Railway.** TypeORM already retries DB connection (`retryAttempts: 10`). If app crashes on first deploy, redeploy once Postgres is healthy.
 - **Service names matter.** Use exactly `postgres`, `redis`, `app` so private DNS works.
-- On Railway the app connects to Postgres/Redis via **`postgres.railway.internal`** and **`redis.railway.internal`**. You can set `DB_HOST=postgres` — the app auto-resolves it on Railway. Or set the full hostname explicitly in Variables.
+- On Railway you can set `DB_HOST=postgres` and `REDIS_HOST=redis` — app auto-resolves to `*.railway.internal`.
 - **Only `app` needs a public domain.** Do not expose Postgres/Redis publicly.
 - After the first successful deploy, set `DB_SYNCHRONIZE=false` on the app service for safer production operation.
 - Change default passwords (`DB_PASSWORD`, `JWT_SECRET`) before going live.

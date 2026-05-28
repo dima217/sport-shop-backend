@@ -25,16 +25,18 @@ x-app-environment: &app-environment
 
 services:
   postgres:
-    image: postgres:16-alpine
+    image: postgres:16
     restart: unless-stopped
     environment:
       POSTGRES_USER: ${DB_USERNAME:-myuser}
       POSTGRES_PASSWORD: ${DB_PASSWORD:-mysecretpassword}
       POSTGRES_DB: ${DB_DATABASE:-mydatabase}
+      # Railway volumes mount at root and contain lost+found — PGDATA must be a subdirectory
+      PGDATA: /var/lib/postgresql/mount/data
     ports:
       - '${DB_PORT:-5432}:5432'
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/mount
       - ./init-db:/docker-entrypoint-initdb.d
     healthcheck:
       test:
