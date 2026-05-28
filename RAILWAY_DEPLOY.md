@@ -27,10 +27,10 @@ Services communicate over Railway private network:
 2. Drag & drop `docker-compose.railway.yml` into the project.
 3. Railway creates 3 services: `postgres`, `redis`, `app`.
 4. Connect **GitHub repo** to the `app` service (Settings → Source).
-5. For `postgres` service → Settings → Volumes → Add Volume:
-   - Mount path: `/var/lib/postgresql/data`
+5. For `postgres` service → attach a **Volume** (see section below).
 6. For `app` service → Settings → Networking → **Generate Domain**.
 7. Set secrets in **app** Variables (see below).
+8. Migrate local data if needed (see **Migrate local DB to Railway** section).
 
 > If `app` fails to build after import, connect the GitHub repo and redeploy.
 
@@ -50,7 +50,7 @@ POSTGRES_PASSWORD=<strong-password>
 POSTGRES_DB=mydatabase
 ```
 
-- Settings → Volumes → mount `/var/lib/postgresql/data`
+- Settings → attach a **Volume** (see section below)
 
 ### 2) Redis
 
@@ -87,7 +87,119 @@ BASE_URL=https://<your-app-domain>
 
 ---
 
-## Verify deployment
+## Attach Volume to Postgres on Railway
+
+In Railway, volumes are **not** always visible under service Settings. Use one of these ways:
+
+### Way 1 — Command Palette (recommended)
+
+1. Open your Railway project (canvas view).
+2. Press **`Ctrl+K`** (Windows/Linux) or **`Cmd+K`** (Mac).
+3. Type **Volume** → choose **Create Volume** / **Add Volume**.
+4. Select service **`postgres`**.
+5. Set mount path: **`/var/lib/postgresql/data`**
+6. Redeploy the `postgres` service.
+
+### Way 2 — Right-click on canvas
+
+1. Right-click empty area on project canvas.
+2. Choose volume creation option.
+3. Attach to service `postgres` with mount path `/var/lib/postgresql/data`.
+
+### Way 3 — CLI
+
+```bash
+railway login
+railway link
+railway volume add --mount-path /var/lib/postgresql/data
+```
+
+Then attach it to the `postgres` service when prompted.
+
+### Important
+
+- Do **not** manually create `RAILWAY_VOLUME_MOUNT_PATH` variable — Railway sets it automatically.
+- Only **one** volume on `/var/lib/postgresql/data` per postgres service.
+- Volume appears only at **runtime**, not during build.
+
+---
+
+## Migrate local DB to Railway
+
+Goal: copy all tables/data from local Docker Postgres to remote Railway Postgres.
+
+### Step 1 — Export local database
+
+From project root (local stack must be running):
+
+```powershell
+.\scripts\backup-local-db.ps1
+```
+
+Or manually:
+
+```powershell
+docker compose exec -T postgres pg_dump -U myuser -d mydatabase --clean --if-exists --no-owner --no-acl > backup.sql
+```
+
+Default credentials from `docker-compose.yml`:
+- user: `myuser`
+- database: `mydatabase`
+
+### Step 2 — Open temporary access to Railway Postgres
+
+Railway Postgres is private by default. For one-time import enable **TCP Proxy**:
+
+1. Open service **`postgres`** on Railway.
+2. **Settings → Networking → TCP Proxy** → Enable (port `5432`).
+3. Copy proxy host + port (example: `monorail.proxy.rlwy.net:12345`).
+
+Build connection string:
+
+```text
+postgresql://myuser:<POSTGRES_PASSWORD>@<TCP_PROXY_HOST>:<TCP_PROXY_PORT>/mydatabase
+```
+
+Use the same `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB` that you set in Railway postgres variables.
+
+### Step 3 — Restore dump to Railway
+
+```powershell
+.\scripts\restore-to-railway.ps1 `
+  -BackupFile "backup-mydatabase-2026-05-28-120000.sql" `
+  -RemoteUrl "postgresql://myuser:<password>@<host>:<port>/mydatabase"
+```
+
+Or manually:
+
+```powershell
+Get-Content backup.sql -Raw | docker run -i --rm postgres:16-alpine psql "postgresql://myuser:<password>@<host>:<port>/mydatabase"
+```
+
+### Step 4 — Verify
+
+1. Check restore output — should end without fatal errors.
+2. Redeploy `app` service.
+3. Open API and verify products/categories/users exist.
+4. **Disable TCP Proxy** on postgres after migration (security).
+
+### Alternative — Railway CLI
+
+If CLI is linked to project:
+
+```bash
+railway connect postgres
+```
+
+This opens interactive `psql`. For bulk restore, TCP Proxy + `psql < backup.sql` is easier.
+
+### Notes
+
+- Run migration when remote postgres is **empty** (first deploy) or use `--clean` dump carefully on production.
+- If remote DB already has schema from `DB_SYNCHRONIZE=true`, restore still works with `--clean --if-exists` dump.
+- Redis data usually does not need migration (queues/cache). Only Postgres tables are migrated.
+
+---
 
 1. Open app logs — should show successful Postgres connection.
 2. Open public domain — `GET /` should return a response.
