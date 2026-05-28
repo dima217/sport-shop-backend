@@ -73,7 +73,10 @@ async function bootstrap() {
     });
   }
   app.enableCors();
-  const port = configService.get<number>('port') || 3000;
+
+  // Railway injects PORT dynamically — must listen on it, not a hardcoded 3000
+  const port = Number(process.env.PORT) || configService.get<number>('port') || 3000;
   await app.listen(port, '0.0.0.0');
+  console.log(`Server listening on 0.0.0.0:${port} (process.env.PORT=${process.env.PORT ?? 'not set'})`);
 }
 bootstrap();

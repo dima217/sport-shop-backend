@@ -48,7 +48,7 @@ Services communicate over Railway private network:
 POSTGRES_USER=myuser
 POSTGRES_PASSWORD=<strong-password>
 POSTGRES_DB=mydatabase
-PGDATA=/var/lib/postgresql/mount/data
+PGDATA=/var/lib/postgresql/data/pgdata
 ```
 
 - Settings → attach a **Volume** (see section below)
@@ -98,35 +98,35 @@ In Railway, volumes are **not** always visible under service Settings. Use one o
 2. Press **`Ctrl+K`** (Windows/Linux) or **`Cmd+K`** (Mac).
 3. Type **Volume** → choose **Create Volume** / **Add Volume**.
 4. Select service **`postgres`**.
-5. Set mount path: **`/var/lib/postgresql/mount`** (not `/var/lib/postgresql/data`)
-6. On **postgres** service Variables add: **`PGDATA=/var/lib/postgresql/mount/data`**
+5. Set mount path: **`/var/lib/postgresql/data`**
+6. On **postgres** service Variables add: **`PGDATA=/var/lib/postgresql/data/pgdata`**
 7. Redeploy the `postgres` service.
 
-> **Why not `/var/lib/postgresql/data`?** Railway volume root contains `lost+found`. Postgres refuses to init directly on a mount point. Data must live in a subdirectory — set via `PGDATA`.
+> Volume root contains `lost+found`. Never point `PGDATA` at the mount root — only at subdirectory `pgdata`.
 
 ### Way 2 — Right-click on canvas
 
 1. Right-click empty area on project canvas.
 2. Choose volume creation option.
-3. Attach to service `postgres` with mount path **`/var/lib/postgresql/mount`**
-4. Add variable `PGDATA=/var/lib/postgresql/mount/data` on postgres service.
+3. Attach to service `postgres` with mount path **`/var/lib/postgresql/data`**
+4. Add variable `PGDATA=/var/lib/postgresql/data/pgdata` on postgres service.
 
 ### Way 3 — CLI
 
 ```bash
 railway login
 railway link
-railway volume add --mount-path /var/lib/postgresql/mount
+railway volume add --mount-path /var/lib/postgresql/data
 ```
 
-Then attach it to the `postgres` service when prompted and set `PGDATA=/var/lib/postgresql/mount/data`.
+Then attach it to the `postgres` service when prompted and set `PGDATA=/var/lib/postgresql/data/pgdata`.
 
 ### Important
 
 - Do **not** manually create `RAILWAY_VOLUME_MOUNT_PATH` variable — Railway sets it automatically.
 - Only **one** volume per postgres service.
 - Volume appears only at **runtime**, not during build.
-- If postgres already failed with `lost+found` error: delete the broken volume, create a new one at `/var/lib/postgresql/mount`, set `PGDATA`, redeploy.
+- If postgres already failed with `lost+found` error: delete the broken volume, create a new one at `/var/lib/postgresql/data`, set `PGDATA`, redeploy.
 
 ---
 
@@ -216,19 +216,43 @@ Postgres volume is mounted at `/var/lib/postgresql/data` — wrong for Railway.
 **Fix:**
 
 1. Remove old volume from postgres service (or create new volume).
-2. Mount path: **`/var/lib/postgresql/mount`**
-3. Variable on postgres: **`PGDATA=/var/lib/postgresql/mount/data`**
+2. Mount path: **`/var/lib/postgresql/data`**
+3. Variable on postgres: **`PGDATA=/var/lib/postgresql/data/pgdata`**
 4. Redeploy postgres — logs should show `database system is ready to accept connections`.
 
-### `sh: locale: not found` during initdb
+### 502 Bad Gateway on every request
 
-You are using **`postgres:16-alpine`**. Alpine has no locales and initdb fails on Railway.
+App logs show "Nest started" and DB connected, but all HTTP requests return 502.
 
-**Fix:**
+**Cause:** Railway proxy forwards to `PORT` from its env, but app listens on another port (often 3000 from compose import).
 
-1. Open service **`postgres`** → change Docker image from `postgres:16-alpine` to **`postgres:16`**
-2. Keep volume mount `/var/lib/postgresql/mount` and `PGDATA=/var/lib/postgresql/mount/data`
-3. Redeploy postgres
+**Fix on app service:**
+
+1. **Variables** → **delete `PORT`** if you set it manually (let Railway inject it)
+2. Also delete **`APP_PORT=3000`** if present
+3. **Settings → Networking → Public Networking**
+   - Domain must be on **`app`** service (not postgres/redis)
+   - Port: leave **auto** or set the same as in deploy logs, e.g. `8080`
+4. Redeploy app
+5. In deploy logs find:
+   ```text
+   Server listening on 0.0.0.0:8080 (process.env.PORT=8080)
+   ```
+6. In Networking, target port must **match** that number
+
+---
+
+### initdb fails (`locale: not found`, `CREATE EXTENSION plpgsql`, exit code 1)
+
+Volume is corrupted after several failed inits, or image is alpine.
+
+**Fix — clean start:**
+
+1. **Delete** postgres service and **delete volume** completely
+2. Import fresh `docker-compose.postgres.railway.yml`
+3. Image: **`postgres:16`**
+4. Volume: **`/var/lib/postgresql/data`**, variable **`PGDATA=/var/lib/postgresql/data/pgdata`**
+5. Redeploy
 
 ### `ETIMEDOUT` / `Unable to connect to the database`
 

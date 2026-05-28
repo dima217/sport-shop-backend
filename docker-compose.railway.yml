@@ -13,7 +13,7 @@ version: '3.8'
 
 x-app-environment: &app-environment
   NODE_ENV: production
-  PORT: ${PORT:-3000}
+  # Do NOT set PORT here — Railway injects it automatically
   DB_HOST: postgres.railway.internal
   DB_PORT: 5432
   DB_USERNAME: ${DB_USERNAME:-myuser}
@@ -39,9 +39,9 @@ services:
       POSTGRES_USER: ${DB_USERNAME:-myuser}
       POSTGRES_PASSWORD: ${DB_PASSWORD:-mysecretpassword}
       POSTGRES_DB: ${DB_DATABASE:-mydatabase}
-      PGDATA: /var/lib/postgresql/mount/data
+      PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
-      - postgres_data:/var/lib/postgresql/mount
+      - postgres_data:/var/lib/postgresql/data
       - ./init-db:/docker-entrypoint-initdb.d
     healthcheck:
       test:

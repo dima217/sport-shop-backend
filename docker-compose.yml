@@ -31,12 +31,12 @@ services:
       POSTGRES_USER: ${DB_USERNAME:-myuser}
       POSTGRES_PASSWORD: ${DB_PASSWORD:-mysecretpassword}
       POSTGRES_DB: ${DB_DATABASE:-mydatabase}
-      # Railway volumes mount at root and contain lost+found — PGDATA must be a subdirectory
-      PGDATA: /var/lib/postgresql/mount/data
+      # Railway volume root has lost+found — data lives in PGDATA subdirectory
+      PGDATA: /var/lib/postgresql/data/pgdata
     ports:
       - '${DB_PORT:-5432}:5432'
     volumes:
-      - postgres_data:/var/lib/postgresql/mount
+      - postgres_data:/var/lib/postgresql/data
       - ./init-db:/docker-entrypoint-initdb.d
     healthcheck:
       test:
