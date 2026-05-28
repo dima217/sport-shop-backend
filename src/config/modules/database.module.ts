@@ -13,6 +13,12 @@ const logger = new Logger('DatabaseModule');
       inject: [ConfigService],
       useFactory: (config: ConfigService<AppConfig>) => {
         const postgres = config.get('postgres');
+        const databaseUrl = process.env.DATABASE_URL;
+        const isProduction = config.get('environment') === 'production';
+        const synchronize = process.env.DB_SYNCHRONIZE
+          ? process.env.DB_SYNCHRONIZE === 'true'
+          : !isProduction;
+        const useSsl = process.env.DB_SSL === 'true';
 
         if (!postgres) throw new Error('Postgres config missing!');
 
@@ -20,18 +26,25 @@ const logger = new Logger('DatabaseModule');
           host=${postgres.host}, 
           port=${postgres.port}, 
           username=${postgres.username}, 
-          database=${postgres.database}, 
-          password=${postgres.password}`);
+          database=${postgres.database},
+          source=${databaseUrl ? 'DATABASE_URL' : 'DB_* vars'}`);
 
         return {
           type: 'postgres',
-          host: postgres.host,
-          port: postgres.port,
-          username: postgres.username,
-          password: postgres.password,
-          database: postgres.database,
+          ...(databaseUrl
+            ? {
+                url: databaseUrl,
+              }
+            : {
+                host: postgres.host,
+                port: postgres.port,
+                username: postgres.username,
+                password: postgres.password,
+                database: postgres.database,
+              }),
           autoLoadEntities: true,
-          synchronize: true,
+          synchronize,
+          ssl: useSsl ? { rejectUnauthorized: false } : false,
           retryAttempts: 10,
           retryDelay: 3000,
         };

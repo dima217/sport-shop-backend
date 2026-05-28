@@ -29,3 +29,10 @@
 - ✅ ESLint + Prettier configured
 - ✅ Pre-commit hooks with Husky + lint-staged
 - ✅ TypeScript strict mode
+- ✅ Docker Compose stack (app + Postgres + Redis)
+- ✅ Railway deployment via Docker Compose (`docker-compose.railway.yml`)
+
+## Deployment
+
+- **Local:** `cp .env.example .env && docker compose up --build`
+- **Railway (app + Postgres + Redis as containers):** see `RAILWAY_DEPLOY.md`

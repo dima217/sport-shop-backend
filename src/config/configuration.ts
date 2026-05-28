@@ -5,7 +5,7 @@ import { AppConfig } from './configuration.interface';
 export const configuration = (): AppConfig => {
   const config = plainToInstance(AppConfig, {
     environment: process.env.NODE_ENV || 'development',
-    port: parseInt(process.env.APP_PORT || '3000', 10),
+    port: parseInt(process.env.PORT || process.env.APP_PORT || '3000', 10),
 
     postgres: {
       host: process.env.DB_HOST || 'localhost',

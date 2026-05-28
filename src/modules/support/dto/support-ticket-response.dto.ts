@@ -37,4 +37,3 @@ export class SupportTicketResponseDto {
   @ApiProperty({ description: 'Date when ticket was last updated' })
   updatedAt: Date;
 }
-

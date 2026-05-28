@@ -1,27 +1,35 @@
 version: '3.8'
 
-# Local development stack: app + Postgres + Redis
-# Run: docker compose up --build
+# Railway stack template: app + Postgres + Redis (all as containers, no managed DB)
+#
+# Railway does NOT run compose files directly. Use this file to create services:
+# 1. Dashboard -> New Project -> Empty project
+# 2. Drag & drop this file OR create 3 services manually (see RAILWAY_DEPLOY.md)
+# 3. Service names MUST be: postgres, redis, app
+#
+# Private networking hostnames:
+#   postgres.railway.internal
+#   redis.railway.internal
 
 x-app-environment: &app-environment
-  NODE_ENV: ${NODE_ENV:-development}
+  NODE_ENV: production
   PORT: ${PORT:-3000}
-  DB_HOST: ${DB_HOST:-postgres}
-  DB_PORT: ${DB_PORT:-5432}
+  DB_HOST: postgres.railway.internal
+  DB_PORT: 5432
   DB_USERNAME: ${DB_USERNAME:-myuser}
   DB_PASSWORD: ${DB_PASSWORD:-mysecretpassword}
   DB_DATABASE: ${DB_DATABASE:-mydatabase}
   DB_SYNCHRONIZE: ${DB_SYNCHRONIZE:-true}
-  DB_SSL: ${DB_SSL:-false}
-  REDIS_HOST: ${REDIS_HOST:-redis}
-  REDIS_PORT: ${REDIS_PORT:-6379}
+  DB_SSL: 'false'
+  REDIS_HOST: redis.railway.internal
+  REDIS_PORT: 6379
   REDIS_PASSWORD: ${REDIS_PASSWORD:-}
   JWT_SECRET: ${JWT_SECRET:-change_me_to_long_random_secret}
   ENABLE_SWAGGER: ${ENABLE_SWAGGER:-true}
-  SWAGGER_TITLE: ${SWAGGER_TITLE:-Sport Equipment API}
-  SWAGGER_DESCRIPTION: ${SWAGGER_DESCRIPTION:-REST API for Sport Equipment E-commerce}
-  SWAGGER_VERSION: ${SWAGGER_VERSION:-1.0}
-  SWAGGER_PATH: ${SWAGGER_PATH:-/api-docs}
+  SWAGGER_TITLE: Sport Equipment API
+  SWAGGER_DESCRIPTION: REST API for Sport Equipment E-commerce
+  SWAGGER_VERSION: '1.0'
+  SWAGGER_PATH: /api-docs
 
 services:
   postgres:
@@ -31,8 +39,6 @@ services:
       POSTGRES_USER: ${DB_USERNAME:-myuser}
       POSTGRES_PASSWORD: ${DB_PASSWORD:-mysecretpassword}
       POSTGRES_DB: ${DB_DATABASE:-mydatabase}
-    ports:
-      - '${DB_PORT:-5432}:5432'
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./init-db:/docker-entrypoint-initdb.d
@@ -49,16 +55,12 @@ services:
   redis:
     image: redis:7-alpine
     restart: unless-stopped
-    ports:
-      - '${REDIS_PORT:-6379}:6379'
 
   app:
     build:
       context: .
       dockerfile: Dockerfile
     restart: unless-stopped
-    ports:
-      - '${APP_PORT:-3000}:${PORT:-3000}'
     environment:
       <<: *app-environment
     depends_on:

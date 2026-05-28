@@ -38,6 +38,12 @@ async function bootstrap() {
   const swaggerConfig = configService.get('swagger');
 
   if (swaggerConfig?.enable) {
+    const publicBaseUrl =
+      process.env.BASE_URL ||
+      (process.env.RAILWAY_PUBLIC_DOMAIN
+        ? `https://${process.env.RAILWAY_PUBLIC_DOMAIN}`
+        : 'http://localhost:3000');
+
     const swaggerOptions = new DocumentBuilder()
       .setTitle(swaggerConfig.title || 'Sport Equipment API')
       .setDescription(swaggerConfig.description || 'REST API for Sport Equipment E-commerce')
@@ -53,7 +59,7 @@ async function bootstrap() {
         },
         'bearerAuth',
       )
-      .addServer(process.env.BASE_URL || 'http://84.201.188.209:3000', 'Production')
+      .addServer(publicBaseUrl, 'Public')
       .addServer('http://localhost:3000', 'Local')
       .build();
 
