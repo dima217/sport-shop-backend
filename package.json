@@ -21,6 +21,7 @@
     "prepare": "husky",
     "swagger:generate": "ts-node -r tsconfig-paths/register scripts/generate-swagger.ts",
     "seed": "ts-node -r tsconfig-paths/register scripts/seed-database.ts",
+    "fix-images": "ts-node -r tsconfig-paths/register scripts/fix-product-images.ts",
     "create-admin": "ts-node -r tsconfig-paths/register scripts/create-admin.ts"
   },
   "dependencies": {

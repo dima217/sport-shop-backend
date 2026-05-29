@@ -43,14 +43,24 @@
       "price": 2990,
       "oldPrice": 3990,
       "images": [
-        "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500",
-        "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500"
+        "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500"
       ],
       "categorySlug": "odezhda",
       "inStock": true,
       "stockQuantity": 50,
-      "sizes": ["S", "M", "L", "XL", "XXL"],
-      "colors": ["Черный", "Белый", "Серый", "Синий"],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "colors": [
+        "Черный",
+        "Белый",
+        "Серый",
+        "Синий"
+      ],
       "brand": "Nike",
       "sku": "NKE-TSH-001",
       "rating": 4.5,
@@ -60,12 +70,22 @@
       "name": "Шорты Adidas Essentials",
       "description": "Удобные спортивные шорты из мягкой ткани. Подходят для бега, тренировок и повседневной носки.",
       "price": 2490,
-      "images": ["https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500"
+      ],
       "categorySlug": "odezhda",
       "inStock": true,
       "stockQuantity": 35,
-      "sizes": ["S", "M", "L", "XL"],
-      "colors": ["Черный", "Серый"],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "colors": [
+        "Черный",
+        "Серый"
+      ],
       "brand": "Adidas",
       "sku": "ADS-SHR-001",
       "rating": 4.3,
@@ -76,12 +96,23 @@
       "description": "Теплая толстовка с капюшоном. Отлично подходит для тренировок на свежем воздухе.",
       "price": 4990,
       "oldPrice": 5990,
-      "images": ["https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500"
+      ],
       "categorySlug": "odezhda",
       "inStock": true,
       "stockQuantity": 20,
-      "sizes": ["M", "L", "XL", "XXL"],
-      "colors": ["Черный", "Серый", "Синий"],
+      "sizes": [
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "colors": [
+        "Черный",
+        "Серый",
+        "Синий"
+      ],
       "brand": "Puma",
       "sku": "PMA-HOD-001",
       "rating": 4.7,
@@ -91,12 +122,22 @@
       "name": "Легинсы Reebok Training",
       "description": "Эластичные легинсы для тренировок. Обеспечивают свободу движений и комфорт.",
       "price": 3490,
-      "images": ["https://images.unsplash.com/photo-1591088398332-8a7791972843?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1591088398332-8a7791972843?w=500"
+      ],
       "categorySlug": "odezhda",
       "inStock": true,
       "stockQuantity": 28,
-      "sizes": ["S", "M", "L"],
-      "colors": ["Черный", "Серый", "Розовый"],
+      "sizes": [
+        "S",
+        "M",
+        "L"
+      ],
+      "colors": [
+        "Черный",
+        "Серый",
+        "Розовый"
+      ],
       "brand": "Reebok",
       "sku": "RBK-LEG-001",
       "rating": 4.4,
@@ -107,12 +148,21 @@
       "description": "Современный спортивный костюм из высокотехнологичной ткани. Включает куртку и брюки.",
       "price": 8990,
       "oldPrice": 10990,
-      "images": ["https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500"
+      ],
       "categorySlug": "odezhda",
       "inStock": true,
       "stockQuantity": 15,
-      "sizes": ["M", "L", "XL"],
-      "colors": ["Черный", "Серый"],
+      "sizes": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "colors": [
+        "Черный",
+        "Серый"
+      ],
       "brand": "Nike",
       "sku": "NKE-SET-001",
       "rating": 4.6,
@@ -122,12 +172,23 @@
       "name": "Майка для фитнеса Under Armour",
       "description": "Легкая майка из влагоотводящей ткани. Идеальна для интенсивных тренировок.",
       "price": 1990,
-      "images": ["https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500"
+      ],
       "categorySlug": "odezhda",
       "inStock": true,
       "stockQuantity": 40,
-      "sizes": ["S", "M", "L", "XL"],
-      "colors": ["Черный", "Белый", "Красный"],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "colors": [
+        "Черный",
+        "Белый",
+        "Красный"
+      ],
       "brand": "Under Armour",
       "sku": "UAR-TNK-001",
       "rating": 4.5,
@@ -139,14 +200,24 @@
       "price": 12990,
       "oldPrice": 14990,
       "images": [
-        "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500",
-        "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500"
+        "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500"
       ],
       "categorySlug": "obuv",
       "inStock": true,
       "stockQuantity": 15,
-      "sizes": ["40", "41", "42", "43", "44", "45"],
-      "colors": ["Черный", "Белый", "Синий"],
+      "sizes": [
+        "40",
+        "41",
+        "42",
+        "43",
+        "44",
+        "45"
+      ],
+      "colors": [
+        "Черный",
+        "Белый",
+        "Синий"
+      ],
       "brand": "Nike",
       "sku": "NKE-SHO-001",
       "rating": 4.8,
@@ -156,12 +227,24 @@
       "name": "Беговые кроссовки Adidas Ultraboost",
       "description": "Профессиональные беговые кроссовки с технологией Boost. Идеальны для длительных пробежек.",
       "price": 14990,
-      "images": ["https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500"
+      ],
       "categorySlug": "obuv",
       "inStock": true,
       "stockQuantity": 12,
-      "sizes": ["39", "40", "41", "42", "43", "44"],
-      "colors": ["Черный", "Белый"],
+      "sizes": [
+        "39",
+        "40",
+        "41",
+        "42",
+        "43",
+        "44"
+      ],
+      "colors": [
+        "Черный",
+        "Белый"
+      ],
       "brand": "Adidas",
       "sku": "ADS-SHO-001",
       "rating": 4.9,
@@ -172,12 +255,24 @@
       "description": "Стильные кроссовки для тренировок в зале. Отличная поддержка стопы.",
       "price": 8990,
       "oldPrice": 10990,
-      "images": ["https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500"
+      ],
       "categorySlug": "obuv",
       "inStock": true,
       "stockQuantity": 18,
-      "sizes": ["40", "41", "42", "43", "44"],
-      "colors": ["Черный", "Белый", "Красный"],
+      "sizes": [
+        "40",
+        "41",
+        "42",
+        "43",
+        "44"
+      ],
+      "colors": [
+        "Черный",
+        "Белый",
+        "Красный"
+      ],
       "brand": "Puma",
       "sku": "PMA-SHO-001",
       "rating": 4.6,
@@ -187,12 +282,22 @@
       "name": "Кроссовки для тенниса Wilson",
       "description": "Специализированные кроссовки для игры в теннис. Отличное сцепление с покрытием.",
       "price": 7990,
-      "images": ["https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500"
+      ],
       "categorySlug": "obuv",
       "inStock": true,
       "stockQuantity": 10,
-      "sizes": ["41", "42", "43", "44"],
-      "colors": ["Белый", "Синий"],
+      "sizes": [
+        "41",
+        "42",
+        "43",
+        "44"
+      ],
+      "colors": [
+        "Белый",
+        "Синий"
+      ],
       "brand": "Wilson",
       "sku": "WLS-SHO-001",
       "rating": 4.5,
@@ -203,12 +308,24 @@
       "description": "Легендарные кроссовки для баскетбола. Максимальная поддержка и амортизация.",
       "price": 15990,
       "oldPrice": 17990,
-      "images": ["https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500"
+      ],
       "categorySlug": "obuv",
       "inStock": true,
       "stockQuantity": 8,
-      "sizes": ["42", "43", "44", "45", "46"],
-      "colors": ["Черный", "Красный", "Белый"],
+      "sizes": [
+        "42",
+        "43",
+        "44",
+        "45",
+        "46"
+      ],
+      "colors": [
+        "Черный",
+        "Красный",
+        "Белый"
+      ],
       "brand": "Jordan",
       "sku": "JRD-SHO-001",
       "rating": 4.9,
@@ -218,12 +335,24 @@
       "name": "Кроссовки для бега Asics Gel",
       "description": "Профессиональные беговые кроссовки с гелевой амортизацией. Для длительных дистанций.",
       "price": 11990,
-      "images": ["https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500"
+      ],
       "categorySlug": "obuv",
       "inStock": true,
       "stockQuantity": 14,
-      "sizes": ["40", "41", "42", "43", "44"],
-      "colors": ["Синий", "Белый", "Оранжевый"],
+      "sizes": [
+        "40",
+        "41",
+        "42",
+        "43",
+        "44"
+      ],
+      "colors": [
+        "Синий",
+        "Белый",
+        "Оранжевый"
+      ],
       "brand": "Asics",
       "sku": "ASC-SHO-001",
       "rating": 4.7,
@@ -234,7 +363,9 @@
       "description": "Набор разборных гантелей с блинами. Регулируемый вес от 2 до 20 кг на каждую гантель.",
       "price": 8990,
       "oldPrice": 10990,
-      "images": ["https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=500"
+      ],
       "categorySlug": "trenazhery",
       "inStock": true,
       "stockQuantity": 8,
@@ -247,7 +378,9 @@
       "name": "Штанга олимпийская 20 кг",
       "description": "Профессиональная олимпийская штанга для силовых тренировок. Выдерживает до 500 кг.",
       "price": 14990,
-      "images": ["https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1541534741688-6078c6b33465?w=500"
+      ],
       "categorySlug": "trenazhery",
       "inStock": true,
       "stockQuantity": 5,
@@ -260,7 +393,9 @@
       "name": "Скамья для жима лежа",
       "description": "Регулируемая скамья для жима лежа. Угол наклона от -20° до +85°. Максимальный вес 300 кг.",
       "price": 12990,
-      "images": ["https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1581009146145-b5ef050c1494?w=500"
+      ],
       "categorySlug": "trenazhery",
       "inStock": true,
       "stockQuantity": 6,
@@ -274,7 +409,9 @@
       "description": "Электрическая беговая дорожка с дисплеем. Максимальная скорость 16 км/ч. Складная конструкция.",
       "price": 89990,
       "oldPrice": 99990,
-      "images": ["https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=500"
+      ],
       "categorySlug": "trenazhery",
       "inStock": true,
       "stockQuantity": 3,
@@ -287,7 +424,9 @@
       "name": "Велотренажер магнитный",
       "description": "Магнитный велотренажер с 8 уровнями нагрузки. LCD дисплей с показателями тренировки.",
       "price": 24990,
-      "images": ["https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1576678927484-cc907957088c?w=500"
+      ],
       "categorySlug": "trenazhery",
       "inStock": true,
       "stockQuantity": 4,
@@ -300,7 +439,9 @@
       "name": "Гиря 16 кг",
       "description": "Чугунная гиря для функциональных тренировок. Идеальна для развития силы и выносливости.",
       "price": 2990,
-      "images": ["https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=500"
+      ],
       "categorySlug": "trenazhery",
       "inStock": true,
       "stockQuantity": 20,
@@ -314,7 +455,9 @@
       "description": "Эллиптический тренажер для кардио тренировок. Низкая ударная нагрузка на суставы.",
       "price": 49990,
       "oldPrice": 59990,
-      "images": ["https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1518611012114-696081aa059e?w=500"
+      ],
       "categorySlug": "trenazhery",
       "inStock": true,
       "stockQuantity": 2,
@@ -327,7 +470,9 @@
       "name": "Гриф олимпийский 20 кг",
       "description": "Профессиональный олимпийский гриф для силовых тренировок. Длина 220 см.",
       "price": 7990,
-      "images": ["https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1541534741688-6078c6b33465?w=500"
+      ],
       "categorySlug": "trenazhery",
       "inStock": true,
       "stockQuantity": 12,
@@ -342,7 +487,6 @@
       "price": 2990,
       "oldPrice": 3990,
       "images": [
-        "https://images.unsplash.com/photo-1614634713297-3a3b143f2a13?w=500",
         "https://images.unsplash.com/photo-1575361204480-aadea25e6e68?w=500"
       ],
       "categorySlug": "myachi",
@@ -357,7 +501,9 @@
       "name": "Баскетбольный мяч Spalding",
       "description": "Официальный баскетбольный мяч Spalding. Размер 7. Кожаное покрытие для профессиональной игры.",
       "price": 4990,
-      "images": ["https://images.unsplash.com/photo-1614634713297-3a3b143f2a13?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=500"
+      ],
       "categorySlug": "myachi",
       "inStock": true,
       "stockQuantity": 15,
@@ -370,7 +516,9 @@
       "name": "Волейбольный мяч Mikasa",
       "description": "Профессиональный волейбольный мяч Mikasa. Размер 5. Используется на международных соревнованиях.",
       "price": 3490,
-      "images": ["https://images.unsplash.com/photo-1614634713297-3a3b143f2a13?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1619642917158-56a6f73be5f8?w=500"
+      ],
       "categorySlug": "myachi",
       "inStock": true,
       "stockQuantity": 20,
@@ -383,7 +531,9 @@
       "name": "Теннисный мяч Wilson Pro Staff",
       "description": "Набор из 4 теннисных мячей Wilson. Официальный мяч для турниров ATP.",
       "price": 890,
-      "images": ["https://images.unsplash.com/photo-1614634713297-3a3b143f2a13?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1622167520715-e65d3ab29226?w=500"
+      ],
       "categorySlug": "myachi",
       "inStock": true,
       "stockQuantity": 50,
@@ -396,7 +546,9 @@
       "name": "Мяч для регби Gilbert",
       "description": "Профессиональный мяч для регби. Размер 5. Водонепроницаемое покрытие.",
       "price": 3990,
-      "images": ["https://images.unsplash.com/photo-1614634713297-3a3b143f2a13?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1589737358914-d6bf10b05fd7?w=500"
+      ],
       "categorySlug": "myachi",
       "inStock": true,
       "stockQuantity": 12,
@@ -409,7 +561,9 @@
       "name": "Мяч для гандбола Select",
       "description": "Профессиональный мяч для гандбола. Размер 3. Отличное сцепление.",
       "price": 2490,
-      "images": ["https://images.unsplash.com/photo-1614634713297-3a3b143f2a13?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1560272564-c83b66b1ad04?w=500"
+      ],
       "categorySlug": "myachi",
       "inStock": true,
       "stockQuantity": 18,
@@ -422,7 +576,9 @@
       "name": "Мяч для водного поло Mikasa",
       "description": "Специализированный мяч для водного поло. Водонепроницаемое покрытие.",
       "price": 2990,
-      "images": ["https://images.unsplash.com/photo-1614634713297-3a3b143f2a13?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1530549387789-4c101726663a?w=500"
+      ],
       "categorySlug": "myachi",
       "inStock": true,
       "stockQuantity": 10,
@@ -435,11 +591,17 @@
       "name": "Спортивная сумка Nike Brasilia",
       "description": "Вместительная спортивная сумка для тренировок. Отделение для обуви. Водонепроницаемый материал.",
       "price": 3990,
-      "images": ["https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500"
+      ],
       "categorySlug": "aksessuary",
       "inStock": true,
       "stockQuantity": 30,
-      "colors": ["Черный", "Серый", "Синий"],
+      "colors": [
+        "Черный",
+        "Серый",
+        "Синий"
+      ],
       "brand": "Nike",
       "sku": "NKE-BAG-001",
       "rating": 4.5,
@@ -449,11 +611,18 @@
       "name": "Бутылка для воды 750 мл",
       "description": "Спортивная бутылка из тритана. Не содержит BPA. Удобная крышка с клапаном.",
       "price": 890,
-      "images": ["https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=500"
+      ],
       "categorySlug": "aksessuary",
       "inStock": true,
       "stockQuantity": 100,
-      "colors": ["Прозрачный", "Синий", "Розовый", "Черный"],
+      "colors": [
+        "Прозрачный",
+        "Синий",
+        "Розовый",
+        "Черный"
+      ],
       "brand": "CamelBak",
       "sku": "CMB-BOT-001",
       "rating": 4.6,
@@ -463,11 +632,18 @@
       "name": "Перчатки для фитнеса",
       "description": "Тренировочные перчатки с защитой ладоней. Предотвращают мозоли и улучшают хват.",
       "price": 1490,
-      "images": ["https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1598971459374-6e4fa54dd2ef?w=500"
+      ],
       "categorySlug": "aksessuary",
       "inStock": true,
       "stockQuantity": 40,
-      "sizes": ["S", "M", "L", "XL"],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
       "brand": "Harbinger",
       "sku": "HRB-GLO-001",
       "rating": 4.4,
@@ -478,11 +654,18 @@
       "description": "Антискользящий коврик для йоги и фитнеса. Толщина 6 мм. Легко моется.",
       "price": 1990,
       "oldPrice": 2490,
-      "images": ["https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1601925260368-ae2f83eb10b5?w=500"
+      ],
       "categorySlug": "aksessuary",
       "inStock": true,
       "stockQuantity": 35,
-      "colors": ["Фиолетовый", "Синий", "Розовый", "Серый"],
+      "colors": [
+        "Фиолетовый",
+        "Синий",
+        "Розовый",
+        "Серый"
+      ],
       "brand": "Liforme",
       "sku": "LIF-MAT-001",
       "rating": 4.7,
@@ -492,11 +675,18 @@
       "name": "Ремень для тяжелой атлетики",
       "description": "Кожаный ремень для пауэрлифтинга и тяжелой атлетики. Ширина 10 см. Регулируемая застежка.",
       "price": 3490,
-      "images": ["https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500"
+      ],
       "categorySlug": "aksessuary",
       "inStock": true,
       "stockQuantity": 15,
-      "sizes": ["S", "M", "L", "XL"],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
       "brand": "Rogue",
       "sku": "ROG-BEL-001",
       "rating": 4.8,
@@ -506,11 +696,17 @@
       "name": "Напульсники Nike",
       "description": "Спортивные напульсники из дышащего материала. Впитывают влагу и защищают запястья.",
       "price": 690,
-      "images": ["https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500"
+      ],
       "categorySlug": "aksessuary",
       "inStock": true,
       "stockQuantity": 60,
-      "colors": ["Черный", "Белый", "Красный"],
+      "colors": [
+        "Черный",
+        "Белый",
+        "Красный"
+      ],
       "brand": "Nike",
       "sku": "NKE-WRB-001",
       "rating": 4.3,
@@ -521,7 +717,9 @@
       "description": "Защитные спортивные очки с поляризованными линзами. Идеальны для бега и велоспорта.",
       "price": 5990,
       "oldPrice": 7990,
-      "images": ["https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1511499767150-a67a394687b8?w=500"
+      ],
       "categorySlug": "aksessuary",
       "inStock": true,
       "stockQuantity": 12,
@@ -534,11 +732,17 @@
       "name": "Шапка спортивная Adidas",
       "description": "Теплая спортивная шапка из флиса. Идеальна для тренировок на свежем воздухе.",
       "price": 1490,
-      "images": ["https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=500"
+      ],
       "categorySlug": "aksessuary",
       "inStock": true,
       "stockQuantity": 25,
-      "colors": ["Черный", "Серый", "Синий"],
+      "colors": [
+        "Черный",
+        "Серый",
+        "Синий"
+      ],
       "brand": "Adidas",
       "sku": "ADS-CAP-001",
       "rating": 4.4,
@@ -549,7 +753,9 @@
       "description": "Сывороточный протеин премиум качества. 24 г белка на порцию. Шоколадный вкус.",
       "price": 4990,
       "oldPrice": 5990,
-      "images": ["https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=500"
+      ],
       "categorySlug": "sportivnoe-pitanie",
       "inStock": true,
       "stockQuantity": 20,
@@ -562,7 +768,9 @@
       "name": "Креатин моногидрат 500 г",
       "description": "Чистый креатин моногидрат без добавок. Повышает силу и выносливость.",
       "price": 1490,
-      "images": ["https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=500"
+      ],
       "categorySlug": "sportivnoe-pitanie",
       "inStock": true,
       "stockQuantity": 30,
@@ -575,7 +783,9 @@
       "name": "BCAA 2:1:1 300 г",
       "description": "Аминокислоты с разветвленной цепью. Ускоряют восстановление после тренировок.",
       "price": 2490,
-      "images": ["https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=500"
+      ],
       "categorySlug": "sportivnoe-pitanie",
       "inStock": true,
       "stockQuantity": 25,
@@ -588,7 +798,9 @@
       "name": "Гейнер Serious Mass 5.4 кг",
       "description": "Высококалорийный гейнер для набора массы. 1250 калорий на порцию. Ванильный вкус.",
       "price": 5990,
-      "images": ["https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=500"
+      ],
       "categorySlug": "sportivnoe-pitanie",
       "inStock": true,
       "stockQuantity": 12,
@@ -601,7 +813,9 @@
       "name": "Предтренировочный комплекс C4",
       "description": "Энергетический комплекс перед тренировкой. Повышает выносливость и концентрацию.",
       "price": 3490,
-      "images": ["https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=500"
+      ],
       "categorySlug": "sportivnoe-pitanie",
       "inStock": true,
       "stockQuantity": 18,
@@ -614,7 +828,9 @@
       "name": "Протеиновые батончики Quest 12 шт",
       "description": "Высокобелковые батончики с низким содержанием сахара. 20 г белка на батончик.",
       "price": 1990,
-      "images": ["https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1550595638-b99d601b8b5b?w=500"
+      ],
       "categorySlug": "sportivnoe-pitanie",
       "inStock": true,
       "stockQuantity": 40,
@@ -627,7 +843,9 @@
       "name": "L-карнитин 500 мл",
       "description": "Жидкий L-карнитин для повышения выносливости и сжигания жира. Вкус лимона.",
       "price": 1290,
-      "images": ["https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=500"
+      ],
       "categorySlug": "sportivnoe-pitanie",
       "inStock": true,
       "stockQuantity": 35,
@@ -640,7 +858,9 @@
       "name": "Глютамин 500 г",
       "description": "Порошковый глютамин для восстановления мышц. Ускоряет заживление после тренировок.",
       "price": 1990,
-      "images": ["https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=500"
+      ],
       "categorySlug": "sportivnoe-pitanie",
       "inStock": true,
       "stockQuantity": 22,
@@ -653,11 +873,17 @@
       "name": "Коврик для йоги премиум 5 мм",
       "description": "Профессиональный коврик для йоги с выравнивающими линиями. Экологичный материал TPE.",
       "price": 4990,
-      "images": ["https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1601925260368-ae2f83eb10b5?w=500"
+      ],
       "categorySlug": "yoga-i-fitnes",
       "inStock": true,
       "stockQuantity": 15,
-      "colors": ["Фиолетовый", "Бирюзовый", "Розовый"],
+      "colors": [
+        "Фиолетовый",
+        "Бирюзовый",
+        "Розовый"
+      ],
       "brand": "Liforme",
       "sku": "LIF-YOG-001",
       "rating": 4.9,
@@ -667,11 +893,17 @@
       "name": "Йога блоки 2 шт",
       "description": "Набор из 2 блоков для йоги. Пенопласт высокой плотности. Размер 23x15x7.5 см.",
       "price": 1490,
-      "images": ["https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500"
+      ],
       "categorySlug": "yoga-i-fitnes",
       "inStock": true,
       "stockQuantity": 25,
-      "colors": ["Фиолетовый", "Синий", "Розовый"],
+      "colors": [
+        "Фиолетовый",
+        "Синий",
+        "Розовый"
+      ],
       "brand": "Gaiam",
       "sku": "GAI-BLO-001",
       "rating": 4.6,
@@ -681,11 +913,17 @@
       "name": "Ремень для йоги 3 м",
       "description": "Прочный ремень для йоги с пряжкой. Помогает в выполнении сложных асан.",
       "price": 990,
-      "images": ["https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500"
+      ],
       "categorySlug": "yoga-i-fitnes",
       "inStock": true,
       "stockQuantity": 40,
-      "colors": ["Фиолетовый", "Синий", "Розовый"],
+      "colors": [
+        "Фиолетовый",
+        "Синий",
+        "Розовый"
+      ],
       "brand": "Manduka",
       "sku": "MAN-BEL-001",
       "rating": 4.5,
@@ -695,7 +933,9 @@
       "name": "Эластичная лента сопротивления",
       "description": "Набор эластичных лент разной жесткости. Для силовых тренировок и растяжки.",
       "price": 1290,
-      "images": ["https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1559827260-dc66d56bef19?w=500"
+      ],
       "categorySlug": "yoga-i-fitnes",
       "inStock": true,
       "stockQuantity": 35,
@@ -708,11 +948,17 @@
       "name": "Мяч для пилатеса 55 см",
       "description": "Гимнастический мяч для пилатеса и фитнеса. Выдерживает до 300 кг. Антиразрывная технология.",
       "price": 1990,
-      "images": ["https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1598289431512-83f4a9f8f8a8?w=500"
+      ],
       "categorySlug": "yoga-i-fitnes",
       "inStock": true,
       "stockQuantity": 20,
-      "colors": ["Синий", "Красный", "Фиолетовый"],
+      "colors": [
+        "Синий",
+        "Красный",
+        "Фиолетовый"
+      ],
       "brand": "Trideer",
       "sku": "TRI-BAL-001",
       "rating": 4.7,
@@ -722,7 +968,9 @@
       "name": "Кольцо для пилатеса",
       "description": "Сопротивляющееся кольцо для пилатеса. Укрепляет мышцы рук, ног и корпуса.",
       "price": 2490,
-      "images": ["https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1518611012114-696081aa059e?w=500"
+      ],
       "categorySlug": "yoga-i-fitnes",
       "inStock": true,
       "stockQuantity": 18,
@@ -735,11 +983,17 @@
       "name": "Ролик для массажа",
       "description": "Фоам роллер для массажа мышц. Снимает напряжение и улучшает гибкость.",
       "price": 1490,
-      "images": ["https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1518611012114-696081aa059e?w=500"
+      ],
       "categorySlug": "yoga-i-fitnes",
       "inStock": true,
       "stockQuantity": 30,
-      "colors": ["Черный", "Синий", "Розовый"],
+      "colors": [
+        "Черный",
+        "Синий",
+        "Розовый"
+      ],
       "brand": "TriggerPoint",
       "sku": "TPT-ROL-001",
       "rating": 4.5,
@@ -749,7 +1003,9 @@
       "name": "Медицинский мяч 4 кг",
       "description": "Утяжеленный мяч для функциональных тренировок. Развивает силу и координацию.",
       "price": 2990,
-      "images": ["https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500"
+      ],
       "categorySlug": "yoga-i-fitnes",
       "inStock": true,
       "stockQuantity": 15,
@@ -762,12 +1018,25 @@
       "name": "Кроссовки для ходьбы New Balance",
       "description": "Удобные кроссовки для ходьбы и повседневной носки. Отличная амортизация.",
       "price": 6990,
-      "images": ["https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500"
+      ],
       "categorySlug": "obuv",
       "inStock": true,
       "stockQuantity": 22,
-      "sizes": ["39", "40", "41", "42", "43", "44"],
-      "colors": ["Серый", "Черный", "Белый"],
+      "sizes": [
+        "39",
+        "40",
+        "41",
+        "42",
+        "43",
+        "44"
+      ],
+      "colors": [
+        "Серый",
+        "Черный",
+        "Белый"
+      ],
       "brand": "New Balance",
       "sku": "NB-SHO-001",
       "rating": 4.6,
@@ -777,12 +1046,23 @@
       "name": "Кроссовки для трейлраннинга Salomon",
       "description": "Профессиональные кроссовки для бега по пересеченной местности. Отличное сцепление.",
       "price": 10990,
-      "images": ["https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500"
+      ],
       "categorySlug": "obuv",
       "inStock": true,
       "stockQuantity": 10,
-      "sizes": ["40", "41", "42", "43", "44"],
-      "colors": ["Черный", "Синий"],
+      "sizes": [
+        "40",
+        "41",
+        "42",
+        "43",
+        "44"
+      ],
+      "colors": [
+        "Черный",
+        "Синий"
+      ],
       "brand": "Salomon",
       "sku": "SAL-SHO-001",
       "rating": 4.8,
@@ -792,12 +1072,22 @@
       "name": "Шорты для плавания Speedo",
       "description": "Профессиональные плавки для бассейна. Быстросохнущий материал.",
       "price": 1990,
-      "images": ["https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1560272564-c83b66b1ad04?w=500"
+      ],
       "categorySlug": "odezhda",
       "inStock": true,
       "stockQuantity": 30,
-      "sizes": ["S", "M", "L", "XL"],
-      "colors": ["Синий", "Черный"],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "colors": [
+        "Синий",
+        "Черный"
+      ],
       "brand": "Speedo",
       "sku": "SPD-SHR-001",
       "rating": 4.5,
@@ -807,12 +1097,23 @@
       "name": "Купальник спортивный Arena",
       "description": "Женский спортивный купальник для плавания. Облегающий крой для минимального сопротивления.",
       "price": 3490,
-      "images": ["https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1530549387789-4c101726663a?w=500"
+      ],
       "categorySlug": "odezhda",
       "inStock": true,
       "stockQuantity": 20,
-      "sizes": ["XS", "S", "M", "L"],
-      "colors": ["Синий", "Черный", "Розовый"],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L"
+      ],
+      "colors": [
+        "Синий",
+        "Черный",
+        "Розовый"
+      ],
       "brand": "Arena",
       "sku": "ARN-SWI-001",
       "rating": 4.6,
@@ -822,11 +1123,17 @@
       "name": "Очки для плавания Speedo",
       "description": "Профессиональные очки для плавания с антизапотевающим покрытием.",
       "price": 1490,
-      "images": ["https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=500"
+      ],
       "categorySlug": "aksessuary",
       "inStock": true,
       "stockQuantity": 45,
-      "colors": ["Синий", "Черный", "Прозрачный"],
+      "colors": [
+        "Синий",
+        "Черный",
+        "Прозрачный"
+      ],
       "brand": "Speedo",
       "sku": "SPD-GLS-001",
       "rating": 4.5,
@@ -836,11 +1143,17 @@
       "name": "Шапочка для плавания Silicone",
       "description": "Силиконовая шапочка для плавания. Защищает волосы от хлора.",
       "price": 690,
-      "images": ["https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=500"
+      ],
       "categorySlug": "aksessuary",
       "inStock": true,
       "stockQuantity": 50,
-      "colors": ["Синий", "Черный", "Розовый"],
+      "colors": [
+        "Синий",
+        "Черный",
+        "Розовый"
+      ],
       "brand": "Speedo",
       "sku": "SPD-CAP-001",
       "rating": 4.4,
@@ -850,11 +1163,17 @@
       "name": "Ласты для плавания Cressi",
       "description": "Профессиональные ласты для плавания. Улучшают скорость и эффективность гребка.",
       "price": 3990,
-      "images": ["https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1559827260-dc66d56bef19?w=500"
+      ],
       "categorySlug": "aksessuary",
       "inStock": true,
       "stockQuantity": 12,
-      "sizes": ["S", "M", "L"],
+      "sizes": [
+        "S",
+        "M",
+        "L"
+      ],
       "brand": "Cressi",
       "sku": "CRE-FIN-001",
       "rating": 4.7,
@@ -864,11 +1183,16 @@
       "name": "Доска для плавания",
       "description": "Плавательная доска для тренировок. Помогает отрабатывать технику плавания.",
       "price": 1290,
-      "images": ["https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1530549387789-4c101726663a?w=500"
+      ],
       "categorySlug": "aksessuary",
       "inStock": true,
       "stockQuantity": 25,
-      "colors": ["Синий", "Желтый"],
+      "colors": [
+        "Синий",
+        "Желтый"
+      ],
       "brand": "Speedo",
       "sku": "SPD-BRD-001",
       "rating": 4.3,
@@ -879,7 +1203,9 @@
       "description": "Профессиональная теннисная ракетка. Баланс контроля и мощности.",
       "price": 8990,
       "oldPrice": 10990,
-      "images": ["https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1617083937165-25eb8f86d248?w=500"
+      ],
       "categorySlug": "aksessuary",
       "inStock": true,
       "stockQuantity": 8,
@@ -892,7 +1218,9 @@
       "name": "Ракетка для бадминтона Yonex",
       "description": "Легкая ракетка для бадминтона. Идеальна для начинающих и продвинутых игроков.",
       "price": 3490,
-      "images": ["https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1617083937165-25eb8f86d248?w=500"
+      ],
       "categorySlug": "aksessuary",
       "inStock": true,
       "stockQuantity": 15,
@@ -905,7 +1233,9 @@
       "name": "Воланы для бадминтона Yonex",
       "description": "Набор из 12 воланов для бадминтона. Высокое качество и долговечность.",
       "price": 1290,
-      "images": ["https://images.unsplash.com/photo-1614634713297-3a3b143f2a13?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1626224583804-3b66efa24ef0?w=500"
+      ],
       "categorySlug": "myachi",
       "inStock": true,
       "stockQuantity": 30,
@@ -918,11 +1248,17 @@
       "name": "Скакалка скоростная",
       "description": "Профессиональная скакалка для тренировок. Регулируемая длина. Отлична для кардио.",
       "price": 890,
-      "images": ["https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1476480862122-209a341adc2?w=500"
+      ],
       "categorySlug": "aksessuary",
       "inStock": true,
       "stockQuantity": 40,
-      "colors": ["Черный", "Красный", "Синий"],
+      "colors": [
+        "Черный",
+        "Красный",
+        "Синий"
+      ],
       "brand": "Rogue",
       "sku": "ROG-JMP-001",
       "rating": 4.4,
@@ -932,7 +1268,9 @@
       "name": "Гиря 24 кг",
       "description": "Чугунная гиря для продвинутых тренировок. Развивает силу всего тела.",
       "price": 3990,
-      "images": ["https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=500"
+      ],
       "categorySlug": "trenazhery",
       "inStock": true,
       "stockQuantity": 12,
@@ -945,7 +1283,9 @@
       "name": "Гиря 32 кг",
       "description": "Тяжелая гиря для опытных спортсменов. Максимальная нагрузка на мышцы.",
       "price": 4990,
-      "images": ["https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=500"
+      ],
       "categorySlug": "trenazhery",
       "inStock": true,
       "stockQuantity": 6,
@@ -958,7 +1298,9 @@
       "name": "Блины для штанги 20 кг (2 шт)",
       "description": "Набор из 2 блинов по 20 кг. Для олимпийской штанги. Чугунные.",
       "price": 4990,
-      "images": ["https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1583454114551-5fe2b5a4cc3e?w=500"
+      ],
       "categorySlug": "trenazhery",
       "inStock": true,
       "stockQuantity": 10,
@@ -971,7 +1313,9 @@
       "name": "Блины для штанги 10 кг (2 шт)",
       "description": "Набор из 2 блинов по 10 кг. Для олимпийской штанги. Чугунные.",
       "price": 2990,
-      "images": ["https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1583454114551-5fe2b5a4cc3e?w=500"
+      ],
       "categorySlug": "trenazhery",
       "inStock": true,
       "stockQuantity": 15,
@@ -984,7 +1328,9 @@
       "name": "Турник настенный",
       "description": "Прочный настенный турник для подтягиваний. Выдерживает до 200 кг.",
       "price": 3990,
-      "images": ["https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1598971639056-fa247665a547?w=500"
+      ],
       "categorySlug": "trenazhery",
       "inStock": true,
       "stockQuantity": 8,
@@ -997,7 +1343,9 @@
       "name": "Брусья для отжиманий",
       "description": "Регулируемые брусья для отжиманий. Развивают мышцы груди и трицепсов.",
       "price": 2990,
-      "images": ["https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50?w=500"
+      ],
       "categorySlug": "trenazhery",
       "inStock": true,
       "stockQuantity": 12,
@@ -1010,11 +1358,17 @@
       "name": "Мяч для фитбола 65 см",
       "description": "Большой гимнастический мяч для фитнеса и реабилитации. Выдерживает до 300 кг.",
       "price": 2490,
-      "images": ["https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1598289431512-83f4a9f8f8a8?w=500"
+      ],
       "categorySlug": "yoga-i-fitnes",
       "inStock": true,
       "stockQuantity": 18,
-      "colors": ["Синий", "Красный", "Фиолетовый"],
+      "colors": [
+        "Синий",
+        "Красный",
+        "Фиолетовый"
+      ],
       "brand": "Trideer",
       "sku": "TRI-BAL-002",
       "rating": 4.6,
@@ -1024,7 +1378,9 @@
       "name": "Утяжелители для ног 2x2 кг",
       "description": "Набор утяжелителей для ног. Регулируемые ремни. Для кардио и силовых тренировок.",
       "price": 1990,
-      "images": ["https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50?w=500"
+      ],
       "categorySlug": "aksessuary",
       "inStock": true,
       "stockQuantity": 20,
@@ -1037,7 +1393,9 @@
       "name": "Утяжелители для рук 2x1 кг",
       "description": "Легкие утяжелители для рук. Идеальны для кардио тренировок и аэробики.",
       "price": 1490,
-      "images": ["https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50?w=500"
+      ],
       "categorySlug": "aksessuary",
       "inStock": true,
       "stockQuantity": 25,
@@ -1050,11 +1408,17 @@
       "name": "Спортивный рюкзак Adidas",
       "description": "Вместительный спортивный рюкзак с отделениями. Идеален для походов в спортзал.",
       "price": 3490,
-      "images": ["https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1622267864933-3b9b1a1d4dc7?w=500"
+      ],
       "categorySlug": "aksessuary",
       "inStock": true,
       "stockQuantity": 28,
-      "colors": ["Черный", "Серый", "Синий"],
+      "colors": [
+        "Черный",
+        "Серый",
+        "Синий"
+      ],
       "brand": "Adidas",
       "sku": "ADS-BAG-002",
       "rating": 4.5,
@@ -1064,11 +1428,17 @@
       "name": "Полотенце спортивное микрофибра",
       "description": "Быстросохнущее полотенце из микрофибры. Компактное и легкое.",
       "price": 990,
-      "images": ["https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1583847261028-c7d9f9a2a2f2?w=500"
+      ],
       "categorySlug": "aksessuary",
       "inStock": true,
       "stockQuantity": 60,
-      "colors": ["Синий", "Серый", "Черный"],
+      "colors": [
+        "Синий",
+        "Серый",
+        "Черный"
+      ],
       "brand": "Nike",
       "sku": "NKE-TWL-001",
       "rating": 4.3,
@@ -1078,7 +1448,9 @@
       "name": "Замок для шкафчика",
       "description": "Надежный замок для спортивного шкафчика. Комбинационный.",
       "price": 490,
-      "images": ["https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1558002032-5437091e8796?w=500"
+      ],
       "categorySlug": "aksessuary",
       "inStock": true,
       "stockQuantity": 80,
@@ -1092,7 +1464,9 @@
       "description": "Изолят сывороточного протеина. 27 г белка на порцию. Минимум углеводов и жиров.",
       "price": 5990,
       "oldPrice": 6990,
-      "images": ["https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=500"
+      ],
       "categorySlug": "sportivnoe-pitanie",
       "inStock": true,
       "stockQuantity": 16,
@@ -1105,7 +1479,9 @@
       "name": "Казеиновый протеин 2.27 кг",
       "description": "Медленный протеин для приема перед сном. Обеспечивает длительное питание мышц.",
       "price": 5490,
-      "images": ["https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=500"
+      ],
       "categorySlug": "sportivnoe-pitanie",
       "inStock": true,
       "stockQuantity": 14,
@@ -1118,7 +1494,9 @@
       "name": "Витамин D3 5000 МЕ",
       "description": "Высокодозированный витамин D3 для поддержания иммунитета и здоровья костей.",
       "price": 890,
-      "images": ["https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1559757148-5c350d0d6216?w=500"
+      ],
       "categorySlug": "sportivnoe-pitanie",
       "inStock": true,
       "stockQuantity": 50,
@@ -1131,7 +1509,9 @@
       "name": "Омега-3 1000 мг",
       "description": "Высококачественные омега-3 жирные кислоты. Поддерживают здоровье сердца и суставов.",
       "price": 1290,
-      "images": ["https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1559757148-5c350d0d6216?w=500"
+      ],
       "categorySlug": "sportivnoe-pitanie",
       "inStock": true,
       "stockQuantity": 40,
@@ -1144,7 +1524,9 @@
       "name": "Мультивитамины для спортсменов",
       "description": "Комплекс витаминов и минералов для активных людей. Повышает энергию и выносливость.",
       "price": 1990,
-      "images": ["https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1559757148-5c350d0d6216?w=500"
+      ],
       "categorySlug": "sportivnoe-pitanie",
       "inStock": true,
       "stockQuantity": 30,
@@ -1157,7 +1539,9 @@
       "name": "ZMA комплекс",
       "description": "Комплекс цинка, магния и витамина B6. Улучшает сон и восстановление.",
       "price": 1790,
-      "images": ["https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1559757148-5c350d0d6216?w=500"
+      ],
       "categorySlug": "sportivnoe-pitanie",
       "inStock": true,
       "stockQuantity": 25,
@@ -1170,7 +1554,9 @@
       "name": "Энергетический гель GU",
       "description": "Быстроусвояемый энергетический гель для бегунов. 100 калорий на пакетик.",
       "price": 190,
-      "images": ["https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1550595638-b99d601b8b5b?w=500"
+      ],
       "categorySlug": "sportivnoe-pitanie",
       "inStock": true,
       "stockQuantity": 100,
@@ -1183,7 +1569,9 @@
       "name": "Изотоник Powerade",
       "description": "Спортивный напиток для восстановления электролитов. Восполняет потери при тренировках.",
       "price": 129,
-      "images": ["https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1622547740455-91a83b204113?w=500"
+      ],
       "categorySlug": "sportivnoe-pitanie",
       "inStock": true,
       "stockQuantity": 200,
@@ -1196,7 +1584,9 @@
       "name": "Бинты для запястий",
       "description": "Эластичные бинты для защиты запястий при тяжелых упражнениях. Длина 1.5 м.",
       "price": 790,
-      "images": ["https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50?w=500"
+      ],
       "categorySlug": "aksessuary",
       "inStock": true,
       "stockQuantity": 35,
@@ -1209,7 +1599,9 @@
       "name": "Коленные бинты",
       "description": "Поддерживающие бинты для коленей. Защищают суставы при приседаниях и жиме ногами.",
       "price": 1490,
-      "images": ["https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50?w=500"
+      ],
       "categorySlug": "aksessuary",
       "inStock": true,
       "stockQuantity": 20,
@@ -1222,7 +1614,9 @@
       "name": "Мел для рук",
       "description": "Спортивный мел для улучшения хвата. Предотвращает скольжение при подтягиваниях.",
       "price": 390,
-      "images": ["https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1517836357463-d25dfeac343d?w=500"
+      ],
       "categorySlug": "aksessuary",
       "inStock": true,
       "stockQuantity": 50,
@@ -1235,7 +1629,9 @@
       "name": "Таймер для тренировок",
       "description": "Спортивный таймер с большим дисплеем. Для интервальных тренировок и табата.",
       "price": 1990,
-      "images": ["https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1518611012114-696081aa059e?w=500"
+      ],
       "categorySlug": "aksessuary",
       "inStock": true,
       "stockQuantity": 15,
@@ -1249,12 +1645,23 @@
       "description": "Теплый пуловер из флиса. Идеален для тренировок на свежем воздухе в прохладную погоду.",
       "price": 5990,
       "oldPrice": 7490,
-      "images": ["https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=500"
+      ],
       "categorySlug": "odezhda",
       "inStock": true,
       "stockQuantity": 18,
-      "sizes": ["M", "L", "XL", "XXL"],
-      "colors": ["Черный", "Серый", "Синий"],
+      "sizes": [
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "colors": [
+        "Черный",
+        "Серый",
+        "Синий"
+      ],
       "brand": "Nike",
       "sku": "NKE-PUL-001",
       "rating": 4.6,
@@ -1264,12 +1671,23 @@
       "name": "Ветровка Adidas",
       "description": "Легкая ветровка с капюшоном. Водонепроницаемая и ветрозащитная.",
       "price": 4990,
-      "images": ["https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=500"
+      ],
       "categorySlug": "odezhda",
       "inStock": true,
       "stockQuantity": 22,
-      "sizes": ["S", "M", "L", "XL"],
-      "colors": ["Черный", "Синий", "Серый"],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "colors": [
+        "Черный",
+        "Синий",
+        "Серый"
+      ],
       "brand": "Adidas",
       "sku": "ADS-JKT-001",
       "rating": 4.5,
@@ -1279,12 +1697,21 @@
       "name": "Носки спортивные Nike Dri-FIT",
       "description": "Влагоотводящие носки для спорта. Предотвращают образование мозолей.",
       "price": 990,
-      "images": ["https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1586350977775-bda9604af96c?w=500"
+      ],
       "categorySlug": "odezhda",
       "inStock": true,
       "stockQuantity": 80,
-      "sizes": ["39-42", "43-46"],
-      "colors": ["Белый", "Черный", "Серый"],
+      "sizes": [
+        "39-42",
+        "43-46"
+      ],
+      "colors": [
+        "Белый",
+        "Черный",
+        "Серый"
+      ],
       "brand": "Nike",
       "sku": "NKE-SOC-001",
       "rating": 4.4,
@@ -1295,12 +1722,21 @@
       "description": "Комплект термобелья для холодной погоды. Сохраняет тепло и отводит влагу.",
       "price": 6990,
       "oldPrice": 8990,
-      "images": ["https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1544966484-b7f35e219c35?w=500"
+      ],
       "categorySlug": "odezhda",
       "inStock": true,
       "stockQuantity": 12,
-      "sizes": ["M", "L", "XL"],
-      "colors": ["Черный", "Серый"],
+      "sizes": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "colors": [
+        "Черный",
+        "Серый"
+      ],
       "brand": "Under Armour",
       "sku": "UAR-TRM-001",
       "rating": 4.7,
@@ -1310,12 +1746,22 @@
       "name": "Штаны для бега Nike",
       "description": "Облегающие штаны для бега. Влагоотводящий материал и светоотражающие элементы.",
       "price": 4490,
-      "images": ["https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500"],
+      "images": [
+        "https://images.unsplash.com/photo-1473960968642-444144002a3d?w=500"
+      ],
       "categorySlug": "odezhda",
       "inStock": true,
       "stockQuantity": 16,
-      "sizes": ["S", "M", "L", "XL"],
-      "colors": ["Черный", "Серый"],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "colors": [
+        "Черный",
+        "Серый"
+      ],
       "brand": "Nike",
       "sku": "NKE-PNT-001",
       "rating": 4.6,

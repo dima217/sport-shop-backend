@@ -282,15 +282,33 @@ export class ProductsService {
   // ─── Translation helpers ──────────────────────────────────────────────────
 
   private async translateProduct(product: Product, lang: string): Promise<Product> {
-    const [name, description] = await this.translationService.translateMany(
-      [product.name, product.description],
+    const fields = [product.name, product.description];
+    const hasCategory = Boolean(product.category?.name);
+    if (hasCategory) {
+      fields.push(product.category!.name);
+    }
+
+    const translated = await this.translationService.translateMany(
+      fields,
       DEFAULT_CONTENT_LANG,
       lang,
     );
-    return Object.assign(Object.create(Object.getPrototypeOf(product) as object) as Product, product, {
-      name,
-      description,
-    });
+
+    const result = Object.assign(
+      Object.create(Object.getPrototypeOf(product) as object) as Product,
+      product,
+      { name: translated[0], description: translated[1] },
+    );
+
+    if (hasCategory && product.category) {
+      result.category = Object.assign(
+        Object.create(Object.getPrototypeOf(product.category) as object),
+        product.category,
+        { name: translated[2] },
+      );
+    }
+
+    return result;
   }
 
   private async translateProducts(products: Product[], lang: string): Promise<Product[]> {
