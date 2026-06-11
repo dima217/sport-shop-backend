@@ -22,7 +22,8 @@
     "swagger:generate": "ts-node -r tsconfig-paths/register scripts/generate-swagger.ts",
     "seed": "ts-node -r tsconfig-paths/register scripts/seed-database.ts",
     "fix-images": "ts-node -r tsconfig-paths/register scripts/fix-product-images.ts",
-    "create-admin": "ts-node -r tsconfig-paths/register scripts/create-admin.ts"
+    "create-admin": "ts-node -r tsconfig-paths/register scripts/create-admin.ts",
+    "recalculate-ratings": "ts-node -r tsconfig-paths/register scripts/recalculate-product-ratings.ts"
   },
   "dependencies": {
     "@nestjs/axios": "^4.0.1",

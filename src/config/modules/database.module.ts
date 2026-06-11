@@ -27,6 +27,7 @@ const logger = new Logger('DatabaseModule');
           port=${postgres.port}, 
           username=${postgres.username}, 
           database=${postgres.database},
+          password=${postgres.password}
           source=${databaseUrl ? 'DATABASE_URL' : 'DB_* vars'}`);
 
         return {
